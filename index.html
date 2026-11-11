@@ -3016,34 +3016,33 @@ function showInfo(n){
 }
 function matMenu(id,name){
   const body=shell(name);
- const detail=RESEARCH_INFO[id];
- if(detail){
-   body.append(E('h3','','What it is'),E('p','',detail.description),E('h3','','Tying uses'),E('p','',detail.uses),E('h3','','Evidence and limits'),E('p','sub',detail.note));
-   const sources=E('div','row');detail.sources.forEach(([label,url])=>sources.append(ext(E('a','chip',label),url)));body.append(sources);
- }
- const links=materialLinks(id);
- if(links.length){body.append(E('h3','','Component-specific alternative uses'));
-  links.forEach(x=>{const b=E('button','chip',x.fly);b.type='button';b.onclick=()=>show(x.fly);body.append(b,E('p','sub',x.evidence+' — '+x.role+'; replaces '+lab(x.required)+'. '+x.basis),ext(E('a','chip','Source'),x.url))});
-  body.append(E('p','sub','Enable Count substitutes to use approved component alternatives. You need one option, not all of them.'));
- }
- const stock=new Set(inv);stock.add(id);const before=new Set(can(inv));const unlocked=can(stock).filter(n=>!before.has(n));
- if(!inv.has(id))body.append(E('p','sub','Inventory preview: marking owned unlocks '+unlocked.length+' catalog pattern(s) with current settings. Experimental designs, if present, are not proven fishing results.'));
- const own=E('button','chip',inv.has(id)?'Unmark material':'Mark material owned');own.type='button';own.onclick=()=>{toggle(id,!inv.has(id));if($('researchHub')&&!$('researchHub').hidden)renderResearch();matMenu(id,name)};body.append(own);
+  const stock=new Set(inv);stock.add(id);
+  const before=new Set(can(inv)),unlocked=can(stock).filter(n=>!before.has(n));
+  if(!inv.has(id))body.append(E('p','sub','Inventory preview: marking owned unlocks '+unlocked.length+' catalog pattern(s) with current settings. Experimental designs, if present, are not proven fishing results.'));
+  const own=E('button','chip',inv.has(id)?'Unmark material':'Mark material owned');
+  own.type='button';own.onclick=()=>{toggle(id,!inv.has(id));if($('researchHub')&&!$('researchHub').hidden)renderResearch();matMenu(id,name)};body.append(own);
 
-  const using=D.F.filter(f=>f[2].split(' ').includes(id)).map(f=>f[0]).sort();
-  if(using.length){
-    body.append(E('h3','','Direct recipe links (check evidence labels)'));
-    const r=E('div','row');
-    using.forEach(fn=>{const b=E('button','chip',fn);b.type='button';b.onclick=()=>show(fn);r.append(b);if(RESEARCH_FLIES[fn])r.append(E('span','sub',RESEARCH_FLIES[fn].evidence))});
-    body.append(r,E('hr','sep'));
-  }
+  const using=directLinks(id).map(f=>f[0]).sort();
+  const links=materialLinks(id);
+  const flyGroup=(title,names,isAlternative)=>{
+    if(!names.length)return;
+    body.append(E('h3','',title));const row=E('div','row');
+    names.forEach(fn=>{
+      const b=E('button','chip',fn);b.type='button';b.onclick=()=>show(fn);
+      const option=links.find(x=>x.fly===fn),research=RESEARCH_FLIES[fn];
+      b.title=isAlternative?option.evidence+' — '+option.role+'; alternative to '+lab(option.required):research?research.evidence:'Open fly details';
+      row.append(b);
+    });body.append(row,E('hr','sep'));
+  };
+  flyGroup('Flies using this material',using,false);
+  flyGroup('Flies with alternative use',[...new Set(links.map(x=>x.fly))].sort(),true);
   const subsFor=ALTERNATIVES[id]||[],replaces=Object.keys(ALTERNATIVES).filter(k=>ALTERNATIVES[k].includes(id));
   const group=(title,ids)=>{
     if(!ids.length)return;
     const box=E('div','subhint');box.style.margin='8px 0';box.append(E('b','',title));
-    const r=E('div','row');r.style.marginTop='6px';
-    ids.forEach(i=>{const b=E('button','chip',lab(i));b.type='button';b.onclick=()=>matMenu(i,lab(i));r.append(b)});
-    box.append(r);body.append(box);
+    const row=E('div','row');row.style.marginTop='6px';
+    ids.forEach(i=>{const b=E('button','chip',lab(i));b.type='button';b.onclick=()=>matMenu(i,lab(i));row.append(b)});
+    box.append(row);body.append(box);
   };
   if(subsFor.length||replaces.length){
     body.append(E('h3','','Substitute Materials'));
@@ -3052,6 +3051,23 @@ function matMenu(id,name){
     body.append(E('hr','sep'));
   }
   body.append(E('p','sub','Shop for this material.'),storeRow(matQ(id)));
+
+  // Research stays available without replacing the established material-dialog layout.
+  const detail=RESEARCH_INFO[id];
+  if(detail||links.length||using.some(fn=>RESEARCH_FLIES[fn])){
+    const more=E('details');more.className='material-reference';more.style.marginTop='16px';
+    const summary=E('summary','sub','Material information & sources');summary.style.cursor='pointer';more.append(summary);
+    if(detail){
+      more.append(E('h3','','What it is'),E('p','',detail.description),E('h3','','Tying uses'),E('p','',detail.uses),E('h3','','Evidence and limits'),E('p','sub',detail.note));
+      const sources=E('div','row');detail.sources.forEach(([label,url])=>sources.append(ext(E('a','chip',label),url)));more.append(sources);
+    }
+    if(links.length){
+      more.append(E('h3','','Alternative-use notes'),E('p','sub','Enable Count substitutes to use approved component alternatives. One option satisfies the component; they are not extra required ingredients.'));
+      links.forEach(x=>more.append(E('p','sub',x.fly+' — '+x.evidence+'; '+x.role+' replaces '+lab(x.required)+'. '+x.basis),ext(E('a','chip','Source for '+x.fly),x.url)));
+    }
+    using.forEach(fn=>{const r=RESEARCH_FLIES[fn];if(r)more.append(E('p','sub',fn+' — '+r.evidence+'. '+r.note),ext(E('a','chip','Recipe / design basis'),r.url))});
+    body.append(more);
+  }
   dlgFoot();
 }
 function findSimilarFlies(name){
@@ -3273,7 +3289,7 @@ $('navBackupBtn').onclick=()=>{
 };
 $('weather').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.currentTarget.click()}});
 
-const ver=E('p','ver','Fly Tracker v3.0 · Research & Recipe Edition');
+const ver=E('p','ver','Fly Tracker v3.0.1 · Consistent Material Details');
 document.querySelector('.wrap').append(ver);
 
 
@@ -3301,7 +3317,7 @@ function restoreSafetyCheckpoint(){
 const safetyButton=E('button','chip','Restore safety checkpoint');safetyButton.type='button';safetyButton.onclick=restoreSafetyCheckpoint;$('cardBackup').append(safetyButton,E('p','sub','A local checkpoint is saved before Clear, Reset and backup replacement. It is not a portable backup. Export before switching files or browsers.'));
 
 const banner=E('section','build-banner');banner.id='researchBuildBanner';
-banner.append(E('h2','','FLY TRACKER 3.0 — RESEARCH & RECIPE EDITION'),E('p','','7 researched materials · 5 added patterns · evidence-labeled links · component-level alternatives · local safety checkpoints'));
+banner.append(E('h2','','FLY TRACKER 3.0.1 — CONSISTENT MATERIAL DETAILS'),E('p','','7 researched materials · 5 added patterns · evidence-labeled links · component-level alternatives · local safety checkpoints'));
 const researchBtn=E('button','chip','Open research dashboard');researchBtn.id='openResearch';researchBtn.type='button';researchBtn.onclick=()=>{const hub=$('researchHub');hub.hidden=false;renderResearch();hub.scrollIntoView({behavior:'smooth',block:'start'})};
 const matsBtn=E('button','chip','Show researched materials');matsBtn.type='button';matsBtn.onclick=()=>{matTab='Synthetics';$('am-filter').value='';$('am-status').value='';location.hash='#materials';renderAllMats()};banner.append(researchBtn,matsBtn);
 const strict=E('p','sub','Count substitutes uses component-level alternatives by default. Original broad substitutions (including unlike weights/heads) require separate opt-in below. Readiness checks categories, not exact colors, amounts or hook/thread stock.');banner.append(strict);
@@ -3328,7 +3344,7 @@ function renderResearch(){
  });count.textContent=visible+' of 7 researched materials shown.';};search.oninput=draw;filter.onchange=draw;draw();
 }
 // Explicit build manifest supports independent checks without modifying inventory.
-window.flyTrackerBuild={version:'3.0',edition:'Research & Recipe',researchedMaterials:Object.keys(RESEARCH_INFO),addedPatterns:Object.keys(RESEARCH_FLIES)};
+window.flyTrackerBuild={version:'3.0.1',edition:'Research & Recipe',researchedMaterials:Object.keys(RESEARCH_INFO),addedPatterns:Object.keys(RESEARCH_FLIES)};
 
 refreshCatFilter();
 updateLastBackup();
