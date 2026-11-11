@@ -3060,6 +3060,14 @@ function showInfo(n){
 }
 function matMenu(id,name){
   const body=shell(name);
+  const info=FTD_MATERIAL_INFO[id];
+  if(info){
+    body.append(E('h3','','Material details'),E('p','',info.description));
+    body.append(E('h3','','Specification and substitution notes'),E('p','sub',info.caution));
+    body.append(E('p','sub','Research basis: manufacturer catalog references and user-supplied product specifications; uncertain details are noted above.'));
+    body.append(ext(E('a','chip','Manufacturer reference'),info.url),E('hr','sep'));
+  }
+
   const using=D.F.filter(f=>f[2].split(' ').includes(id)).map(f=>f[0]).sort();
   if(using.length){
     body.append(E('h3','','Flies using this material'));
@@ -3304,6 +3312,61 @@ $('weather').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.p
 
 const ver=E('p','ver','Fly Tracker v2.0 · consolidated build');
 document.querySelector('.wrap').append(ver);
+
+
+// FTD material catalog additions
+const FTD_MATERIAL_INFO={
+  "crystal_hair": {
+    "label": "Crystal Hair",
+    "description": "13-inch wavy synthetic hair with clear tinsel/microfilaments; translucent bulk, flash and movement. Use for medium to very large baitfish and long pike/musky tails paired with a Crystal Dubbing Brush.",
+    "caution": "Synthetic hair; not a universal replacement for short flash.",
+    "url": "https://www.flytyersdungeon.com/Materials/Chart_Crystal_Hair.htm"
+  },
+  "shuck_yarn": {
+    "label": "Shuck Yarn",
+    "description": "Z-Lon/Zelon- and Z-Yarn-like synthetic yarn for trailing shucks, emerger wings, spinner wings and dry-fly underwings.",
+    "caution": "Use sparse bundles. Similarity does not establish identical polymer composition.",
+    "url": "https://www.flytyersdungeon.com/Materials/Chart_Shuck_Yarn.htm"
+  },
+  "congo_hair": {
+    "label": "Congo Hair",
+    "description": "Water-shedding, shape-holding synthetic baitfish hair with sheen; trout through musky and saltwater predator patterns.",
+    "caution": "Properties from supplied description; do not assume identical performance to EP Fibers.",
+    "url": "https://www.flytyersdungeon.com/Materials/synthetichair.htm"
+  },
+  "pip": {
+    "label": "P.I.P. (Parachute Indicator Post)",
+    "description": "Bright indicator-colored fiber for visible parachute posts on dry flies.",
+    "caution": "Post/wing application, not a replacement for hackle or structural hair bodies.",
+    "url": "https://www.flytyersdungeon.com/Materials/tailsandwings.htm"
+  },
+  "critter_hair": {
+    "label": "Critter Hair",
+    "description": "Slightly crimped synthetic hair similar to Baitfish Hair; baitfish, streamers, streamer brushes and bucktail-style wings. Supplied specifications: 20-inch overall length and 16 colors.",
+    "caution": "Overall length is not necessarily individual usable fiber length. Color count not verified as current inventory. Not for spun deer-hair heads.",
+    "url": "https://www.flytyersdungeon.com/Materials/synthetichair.htm"
+  },
+  "ff_diamond_braid": {
+    "label": "FF Diamond Braid",
+    "description": "Wide flat diamond-braided tinsel for bonefish bodies, panfish flies, streamer bodies and wingcases. Supplied dimensions: 1/8 inch wide (approximately 3.2 mm), over 10 feet per pack.",
+    "caution": "Corrected supplied 3 cm conversion. Supplied Pearl and Pearl colors wording is ambiguous; color availability not established. Width can be excessive for small flies.",
+    "url": "https://www.flytyersdungeon.com/Materials/flashandtinsel.htm"
+  },
+  "hi_float_fibers": {
+    "label": "Hi-Float Fibers",
+    "description": "Ultra-fine synthetic dry-fly wing fibers marketed for flotation; parachute posts, split upright wings, caddis, stonefly and hopper wings.",
+    "caution": "Wing/post substitutions only; not a universal substitute for hackle, tails or structural hair. Exact polymer and measured flotation not verified.",
+    "url": "https://www.flytyersdungeon.com/Materials/tailsandwings.htm"
+  }
+};
+Object.entries(FTD_MATERIAL_INFO).forEach(([id,info])=>{
+ const g=D.M.find(g=>g[0]==='Synthetics');
+ if(g&&!g[1].some(m=>m[0]===id))g[1].push([id,info.label]);
+ LB[id]=info.label;SQ[id]='Fly Tyers Dungeon '+info.label;
+});
+ALTERNATIVES.shuck_yarn=['zlon'];
+ALTERNATIVES.zlon=[...new Set([...(ALTERNATIVES.zlon||[]),'shuck_yarn'])];
+_ucN=-1;
 
 refreshCatFilter();
 updateLastBackup();
