@@ -3225,6 +3225,9 @@ function renderAllFlies(){
 let matTab='All';
 function renderAllMats(){
   const body=$('allmats-body');if(!body)return;
+  // New catalog additions can be appended after the first render. Rebuild the
+  // material-to-fly index before drawing cards so their fly counts stay current.
+  _ucN=-1;
   const fq=($('am-filter').value||'').toLowerCase(),fs=$('am-status').value;
   body.textContent='';
   const all=[];
