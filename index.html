@@ -1269,204 +1269,13 @@ function has(m,s){
 }
 function ownedAlt(m,s){return (ALTERNATIVES[m]||[]).filter(a=>s.has(a))}
 function sugg(m,s){return ALTERNATIVES[m]||[]}
-const FTD_INFO={
-  "crystal_hair": {
-    "label": "Crystal Hair",
-    "description": "Long wavy synthetic fibers with clear micro-tinsel; supplied length 13 inches. Bulk and translucent flash for large baitfish and predator tails.",
-    "note": "Independent brush discussion corroborates crinkle fibers and micro-tinsel. No verified independent named recipe found; no invented recipe count. Not Arizona Crystal Minnow Hair.",
-    "sources": [
-      [
-        "Independent brush discussion",
-        "https://www.michigan-sportsman.com/threads/playing-around-with-brushes.739204/page-3"
-      ]
-    ]
-  },
-  "shuck_yarn": {
-    "label": "Shuck Yarn",
-    "description": "Synthetic trailing-shuck and wing yarn comparable in use to Zelon/Z-Lon; use sparsely for shucks, emerger/spinner wings and underwings.",
-    "note": "Linked as an alternative only for the named shuck/wing components. Other brands descriptions do not prove identical polymer composition.",
-    "sources": [
-      [
-        "Independent Shuck Yarn listing",
-        "https://www.tungsten-beads-plus.com/products/semperfli-shuck-yarn"
-      ],
-      [
-        "Sparkle Dun / X-Caddis",
-        "https://www.johnkreft.com/selecting-the-proper-deer-hair-to-tie-sparkle-dun-and-x-caddis-flies/"
-      ],
-      [
-        "Zelon Midge",
-        "https://news.orvis.com/fly-fishing/video-how-to-tie-mathewss-zelon-midge"
-      ]
-    ]
-  },
-  "congo_hair": {
-    "label": "Congo Hair",
-    "description": "Water-shedding, shape-holding synthetic baitfish hair. Used for baitfish bodies, crab profiles and trimmed brush heads.",
-    "note": "Exact-product published connection: James St. Clair Congo Hair Sculpin, custom dubbing-brush head.",
-    "sources": [
-      [
-        "Congo Hair Sculpin recipe",
-        "https://pnwflyfishing.com/forum/articles/congo-hair-sculpin-streamer-fly.29/"
-      ],
-      [
-        "Independent shop description",
-        "https://www.spacecoastflies.com/products/congohair"
-      ]
-    ]
-  },
-  "pip": {
-    "label": "P.I.P. (Parachute Indicator Post)",
-    "description": "Visible synthetic parachute-post fibers. Independent A&M listing confirms the expanded name and application; floatant treatment may matter.",
-    "note": "Role-specific post alternative only, never a replacement for hackle, bodies or all calf-hair applications.",
-    "sources": [
-      [
-        "Independent P.I.P. listing",
-        "https://www.amfishingtackle.nl/en/fly-tying/streamer-pike-flash/aampm-pip--parachute-material/"
-      ],
-      [
-        "Parachute Adams yarn-post recipe",
-        "https://howtoflyfish.orvis.com/fly-tying-videos/dry-flies/715-parachute_adams_with_a_twist"
-      ]
-    ]
-  },
-  "critter_hair": {
-    "label": "Critter Hair",
-    "description": "Supplied description: slightly crimped synthetic hair similar to Baitfish Hair, for streamers, baitfish, brushes and bucktail-style wings. Supplied 20-inch overall length and 16-color range not independently verified.",
-    "note": "No reliable independent named recipe found. No automatic bucktail substitution or invented fly count. Overall package length may not equal usable fiber length.",
-    "sources": [
-      [
-        "Manufacturer reference; not independent verification",
-        "https://www.flytyersdungeon.com/Materials/synthetichair.htm"
-      ]
-    ]
-  },
-  "ff_diamond_braid": {
-    "label": "FF Diamond Braid",
-    "description": "Flat diamond-braided tinsel for wrapped bodies and wingcases. Supplied width 1/8 inch is approximately 3.2 mm, NOT 3 cm. Supplied quantity over 10 feet; color wording ambiguous.",
-    "note": "Gotcha connection is a material-class substitution, not a recipe naming FTD FF brand. Match width and pearl color.",
-    "sources": [
-      [
-        "Charlie Craven Gotcha",
-        "https://charliesflybox.com/blogs/step-by-step-tutorials/gotcha"
-      ]
-    ]
-  },
-  "hi_float_fibers": {
-    "label": "Hi-Float Fibers",
-    "description": "Ultrafine synthetic fibers marketed for floating wings. Independent TOF listing describes brushed spent, loop and V wings and unbrushed abdomens; exact equivalence to FTD not established.",
-    "note": "Linked only as a post alternative on selected parachute recipes. Hi Float Attractor is a video lead, not a fully verified recipe in this catalog.",
-    "sources": [
-      [
-        "Independent listing",
-        "https://www.tof-flyfishing.com/en/product=hi-float-fibers&id=1009389"
-      ],
-      [
-        "Hi Float Attractor video",
-        "https://www.youtube.com/watch?v=Vyhb9laxcBk"
-      ]
-    ]
-  }
-};
-const FLY_MATERIAL_OPTIONS=[
-  {
-    "fly": "Parachute Adams",
-    "required": "poly_yarn",
-    "alternatives": [
-      "pip",
-      "hi_float_fibers"
-    ],
-    "role": "parachute post",
-    "basis": "Role-specific alternative; published Adams uses a yarn post. Match fiber size and preparation."
-  },
-  {
-    "fly": "BWO Parachute",
-    "required": "poly_yarn",
-    "alternatives": [
-      "pip",
-      "hi_float_fibers"
-    ],
-    "role": "parachute post",
-    "basis": "Role-specific alternative; published Adams uses a yarn post. Match fiber size and preparation."
-  },
-  {
-    "fly": "PMD Parachute",
-    "required": "poly_yarn",
-    "alternatives": [
-      "pip",
-      "hi_float_fibers"
-    ],
-    "role": "parachute post",
-    "basis": "Role-specific alternative; published Adams uses a yarn post. Match fiber size and preparation."
-  },
-  {
-    "fly": "Parachute Hare\u2019s Ear",
-    "required": "poly_yarn",
-    "alternatives": [
-      "pip",
-      "hi_float_fibers"
-    ],
-    "role": "parachute post",
-    "basis": "Role-specific alternative; published Adams uses a yarn post. Match fiber size and preparation."
-  },
-  {
-    "fly": "Adam's Purple Parachute",
-    "required": "poly_yarn",
-    "alternatives": [
-      "pip",
-      "hi_float_fibers"
-    ],
-    "role": "parachute post",
-    "basis": "Role-specific alternative; published Adams uses a yarn post. Match fiber size and preparation."
-  },
-  {
-    "fly": "Sparkle Dun (BWO/PMD)",
-    "required": "zlon",
-    "alternatives": [
-      "shuck_yarn"
-    ],
-    "role": "trailing shuck",
-    "basis": "Zelon-family application; alternative, not an exact FTD-product recipe."
-  },
-  {
-    "fly": "X-Caddis",
-    "required": "zlon",
-    "alternatives": [
-      "shuck_yarn"
-    ],
-    "role": "trailing shuck",
-    "basis": "Zelon-family application; alternative, not an exact FTD-product recipe."
-  },
-  {
-    "fly": "Mathews\u2019s Zelon Midge",
-    "required": "zlon",
-    "alternatives": [
-      "shuck_yarn"
-    ],
-    "role": "shuck / wing",
-    "basis": "Zelon-family application; alternative, not an exact FTD-product recipe."
-  },
-  {
-    "fly": "Gotcha (Craven Sili-Leg Variant)",
-    "required": "flat_diamond_braid",
-    "alternatives": [
-      "ff_diamond_braid"
-    ],
-    "role": "pearl braid body, tail and underwing",
-    "basis": "Material-class substitution; match width and pearl color."
-  }
-];
+const FTD_INFO={"crystal_hair": {"label": "Crystal Hair", "description": "Long wavy synthetic fiber plus micro-tinsel for bulky translucent baitfish and streamer brushes. Supplied length 13 inches.", "note": "No independently verified named recipe established. Not Arizona Crystal Minnow Hair.", "url": "https://www.michigan-sportsman.com/threads/playing-around-with-brushes.739204/page-3"}, "shuck_yarn": {"label": "Shuck Yarn", "description": "Synthetic trailing-shuck/wing yarn comparable in application to Zelon. Use for shucks, emerger/spinner wings and underwings.", "note": "Linked as an application-based alternative, not an exact FTD recipe or proof of identical polymer composition.", "url": "https://www.tungsten-beads-plus.com/products/semperfli-shuck-yarn"}, "congo_hair": {"label": "Congo Hair", "description": "Synthetic water-shedding, shape-holding baitfish hair; crab bodies, stacked profiles and trimmed brush heads.", "note": "Congo Hair Sculpin is an exact-product published recipe; other fibers and flash are also required.", "url": "https://pnwflyfishing.com/forum/articles/congo-hair-sculpin-streamer-fly.29/"}, "pip": {"label": "P.I.P. (Parachute Indicator Post)", "description": "Visible synthetic parachute-post material.", "note": "Post alternatives are recipe-specific. Not a replacement for hackle, body or every use of calf hair.", "url": "https://www.amfishingtackle.nl/en/fly-tying/streamer-pike-flash/aampm-pip--parachute-material/"}, "critter_hair": {"label": "Critter Hair", "description": "Supplied description: slightly crimped synthetic hair for baitfish, streamers, brushes and bucktail-style wings. Supplied 20-inch overall length and 16 colors not independently verified.", "note": "No reliable independent named recipe verified. Do not automatically replace all bucktail uses.", "url": "https://www.flytyersdungeon.com/Materials/synthetichair.htm"}, "ff_diamond_braid": {"label": "FF Diamond Braid", "description": "Flat diamond-braided tinsel for bodies and wingcases. Supplied 1/8-inch width is approximately 3.2 mm, NOT 3 cm; over 10 feet per pack supplied.", "note": "Gotcha uses the material class, not the exact FTD brand. Match width and pearl color. Supplied color wording ambiguous.", "url": "https://charliesflybox.com/blogs/step-by-step-tutorials/gotcha"}, "hi_float_fibers": {"label": "Hi-Float Fibers", "description": "Ultrafine synthetic floating-wing fibers. TOF independently describes brushed wings and unbrushed abdomens, without establishing identical manufacture to FTD.", "note": "Application-based post alternatives only. Hi Float Attractor is a video lead, not a verified complete recipe here.", "url": "https://www.tof-flyfishing.com/en/product=hi-float-fibers&id=1009389"}};
+const FLY_MATERIAL_OPTIONS=[{"fly": "Parachute Adams", "required": "poly_yarn", "alternatives": ["pip", "hi_float_fibers"], "role": "parachute post", "url": "https://howtoflyfish.orvis.com/fly-tying-videos/dry-flies/715-parachute_adams_with_a_twist"}, {"fly": "BWO Parachute", "required": "poly_yarn", "alternatives": ["pip", "hi_float_fibers"], "role": "parachute post", "url": "https://howtoflyfish.orvis.com/fly-tying-videos/dry-flies/715-parachute_adams_with_a_twist"}, {"fly": "PMD Parachute", "required": "poly_yarn", "alternatives": ["pip", "hi_float_fibers"], "role": "parachute post", "url": "https://howtoflyfish.orvis.com/fly-tying-videos/dry-flies/715-parachute_adams_with_a_twist"}, {"fly": "Parachute Hare\u2019s Ear", "required": "poly_yarn", "alternatives": ["pip", "hi_float_fibers"], "role": "parachute post", "url": "https://howtoflyfish.orvis.com/fly-tying-videos/dry-flies/715-parachute_adams_with_a_twist"}, {"fly": "Adam's Purple Parachute", "required": "poly_yarn", "alternatives": ["pip", "hi_float_fibers"], "role": "parachute post", "url": "https://howtoflyfish.orvis.com/fly-tying-videos/dry-flies/715-parachute_adams_with_a_twist"}, {"fly": "Sparkle Dun (BWO/PMD)", "required": "zlon", "alternatives": ["shuck_yarn"], "role": "trailing shuck", "url": "https://www.johnkreft.com/selecting-the-proper-deer-hair-to-tie-sparkle-dun-and-x-caddis-flies/"}, {"fly": "X-Caddis", "required": "zlon", "alternatives": ["shuck_yarn"], "role": "trailing shuck", "url": "https://www.johnkreft.com/selecting-the-proper-deer-hair-to-tie-sparkle-dun-and-x-caddis-flies/"}, {"fly": "Mathews\u2019s Zelon Midge", "required": "zlon", "alternatives": ["shuck_yarn"], "role": "shuck / wing", "url": "https://news.orvis.com/fly-fishing/video-how-to-tie-mathewss-zelon-midge"}, {"fly": "Gotcha (Craven Sili-Leg Variant)", "required": "flat_diamond_braid", "alternatives": ["ff_diamond_braid"], "role": "pearl braid body / tail / underwing", "url": "https://charliesflybox.com/blogs/step-by-step-tutorials/gotcha"}];
 
 function recipeOptions(f,m){return FLY_MATERIAL_OPTIONS.filter(x=>x.fly===f[0]&&x.required===m).flatMap(x=>x.alternatives)}
 function recipeHas(f,m,stock){return has(m,stock)||(subsOn&&recipeOptions(f,m).some(a=>stock.has(a)))}
-function materialLinks(id){return FLY_MATERIAL_OPTIONS.filter(x=>x.alternatives.includes(id)&&D.F.some(f=>f[0]===x.fly))}
-function usageLabel(id){
- const direct=D.F.filter(f=>f[2].split(' ').includes(id)).length;
- const alternatives=new Set(materialLinks(id).map(x=>x.fly)).size;
- if(!direct&&!alternatives)return FTD_INFO[id]?'0 verified links':'';
- return [direct?direct+' recipe'+(direct===1?'':'s'):'',alternatives?alternatives+' alternative'+(alternatives===1?'':'s'):''].filter(Boolean).join(' · ');
-}
-
+function materialLinks(id){return FLY_MATERIAL_OPTIONS.filter(x=>x.alternatives.includes(id))}
+function usageLabel(id){const direct=D.F.filter(f=>f[2].split(' ').includes(id)).length;const alt=new Set(materialLinks(id).map(x=>x.fly)).size;return [direct?direct+' recipe'+(direct===1?'':'s'):'',alt?alt+' alternative'+(alt===1?'':'s'):''].filter(Boolean).join(' · ')||(FTD_INFO[id]?'0 verified links':'')}
 const miss=(f,s)=>f[2].split(' ').filter(m=>!recipeHas(f,m,s));
 const can=s=>D.F.filter(f=>!miss(f,s).length).map(f=>f[0]);
 
@@ -3190,17 +2999,11 @@ function showInfo(n){
 }
 function matMenu(id,name){
   const body=shell(name);
-  const info=FTD_INFO[id];
-  if(info){
-    body.append(E('h3','','What it is and uses'),E('p','',info.description),E('h3','','Evidence and limits'),E('p','sub',info.note));
-    const refs=E('div','row');info.sources.forEach(([label,url])=>refs.append(ext(E('a','chip',label),url)));body.append(refs);
-  }
-  const options=materialLinks(id);
-  if(options.length){
-    body.append(E('h3','','Flies with role-specific alternative use'));
-    options.forEach(x=>{const b=E('button','chip',x.fly);b.type='button';b.onclick=()=>show(x.fly);body.append(b,E('p','sub',x.role+' — replaces '+lab(x.required)+'. '+x.basis))});
-    body.append(E('p','sub','Enable Count substitutes to use these alternatives in readiness calculations. They are OR choices, not extra mandatory ingredients.'));
-  }else if(info&&!D.F.some(f=>f[2].split(' ').includes(id))){body.append(E('p','sub','No verified catalog recipe linked yet. This is not a claim that no fly can use the material.'))}
+ const info=FTD_INFO[id];
+ if(info){body.append(E('h3','','Material and uses'),E('p','',info.description),E('p','sub',info.note),ext(E('a','chip','Research source'),info.url));}
+ const links=materialLinks(id);
+ if(links.length){body.append(E('h3','','Role-specific alternative uses'));links.forEach(x=>{const b=E('button','chip',x.fly);b.type='button';b.onclick=()=>show(x.fly);body.append(b,E('p','sub',x.role+' — alternative to '+lab(x.required)+', not an extra mandatory ingredient.'),ext(E('a','chip','Pattern / application source'),x.url))});body.append(E('p','sub','Enable Count substitutes to include these choices in readiness calculations.'))}
+ if(info&&!links.length&&!D.F.some(f=>f[2].split(' ').includes(id)))body.append(E('p','sub','0 verified catalog links. No independently confirmed named recipe has been established; this does not mean the material is unusable.'));
 
   const using=D.F.filter(f=>f[2].split(' ').includes(id)).map(f=>f[0]).sort();
   if(using.length){
@@ -3444,14 +3247,17 @@ $('navBackupBtn').onclick=()=>{
 };
 $('weather').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.currentTarget.click()}});
 
-const ver=E('p','ver','Fly Tracker v2.2 · linked materials and role-specific alternatives');
+const ver=E('p','ver','Fly Tracker v2.3 · verified linked-materials build');
 document.querySelector('.wrap').append(ver);
 
-Object.assign(RECIPES,{"Congo Hair Sculpin": ["Eyes and tail \u2014 Secure dumbbell eyes under the shank and add Fire Tiger Flashabou at the rear.", "Body \u2014 Tie sparse UV Shrimp SF Fibers underneath and Wild Olive SF Fibers above in three sections; trim to a sculpin body.", "Overbody and fins \u2014 Add barred light olive rabbit strip and two golden olive Coq de Leon hen feathers.", "Brush \u2014 Spin alternating Baitfish Olive and Dark Green Congo Hair with Ice Wing and Starburst flash in a wire-core brush.", "Head \u2014 Wrap the brush behind the fins and around the eyes; finish and trim flat underneath, rounded above."], "Gotcha (Craven Sili-Leg Variant)": ["Eyes \u2014 Secure bead-chain or lead eyes on a saltwater hook with pink thread.", "Tail \u2014 Double pearl flat diamond braid along the shank to form the tail.", "Body \u2014 Wrap separate braid forward, figure-eight around eyes, secure remaining ends back as underwing.", "Legs and wing \u2014 Add doubled hot-orange/pearl Sili-Legs and tan craft fur or pale Polar Fibre.", "Finish \u2014 Form pink thread head, trim legs and shred tail braid; cement. FF Diamond Braid is an optional width/color-matched alternative."], "Mathews\u2019s Zelon Midge": ["Start \u2014 Use an emerger hook size 18-24 and olive 140D thread.", "Shuck and wing \u2014 Use Midge Gray Straight Zelon. Shuck Yarn is an application-based alternative.", "Thorax \u2014 Dub black Australian possum; catalog Dubbing Black / Dark is a category-level match, not proof of exact possession.", "Finish \u2014 Form a tan 12/0 thread head. See linked Orvis recipe for the original materials."]});
-FLYINFO["Congo Hair Sculpin"]="<p>Published pattern; catalog materials are category-level inventory matches. Match exact color, dimensions and preparations to the source.</p><p><a href=\"https://pnwflyfishing.com/forum/articles/congo-hair-sculpin-streamer-fly.29/\" target=\"_blank\" rel=\"noopener noreferrer\">Published recipe and tying instructions</a></p>";
-FLYINFO["Gotcha (Craven Sili-Leg Variant)"]="<p>Published pattern; catalog materials are category-level inventory matches. Match exact color, dimensions and preparations to the source.</p><p><a href=\"https://charliesflybox.com/blogs/step-by-step-tutorials/gotcha\" target=\"_blank\" rel=\"noopener noreferrer\">Published recipe and tying instructions</a></p>";
-FLYINFO["Mathews\u2019s Zelon Midge"]="<p>Published pattern; catalog materials are category-level inventory matches. Match exact color, dimensions and preparations to the source.</p><p><a href=\"https://news.orvis.com/fly-fishing/video-how-to-tie-mathewss-zelon-midge\" target=\"_blank\" rel=\"noopener noreferrer\">Published recipe and tying instructions</a></p>";
+Object.assign(RECIPES,{"Congo Hair Sculpin": ["Secure dumbbell eyes and rear Fire Tiger Flashabou.", "Tie three sparse sections of UV Shrimp SF Fibers below and Wild Olive above; trim.", "Add barred light olive rabbit overbody and golden olive Coq de Leon hen fins.", "Make a wire-core brush from Baitfish Olive and Dark Green Congo Hair with Ice Wing and Starburst flash.", "Wrap brush head and trim flat underneath and rounded above. Match full source recipe."], "Gotcha (Craven Sili-Leg Variant)": ["Secure bead-chain or lead eyes with pink thread.", "Tie doubled pearl flat diamond braid for the tail.", "Wrap braid body and figure-eight around eyes; secure remaining ends back as underwing.", "Add hot-orange/pearl Sili-Legs and tan craft fur or pale Polar Fibre wing.", "Form pink head, trim, shred braid tail and cement. FF braid is an optional width/color-matched alternative."], "Mathews\u2019s Zelon Midge": ["Mount an emerger hook size 18-24; start olive 140D thread.", "Use Midge Gray Straight Zelon for shuck and wing; Shuck Yarn is an optional application-based alternative.", "Dub black Australian-possum thorax; dark dubbing inventory entry is only a category-level match.", "Finish with tan 12/0 thread head; refer to original Orvis recipe."]});
+FLYINFO["Congo Hair Sculpin"]="<p>Published pattern. Catalog material names are category-level matches; match exact specifications and colors to source.</p><p><a href=\"https://pnwflyfishing.com/forum/articles/congo-hair-sculpin-streamer-fly.29/\" target=\"_blank\" rel=\"noopener noreferrer\">Original recipe</a></p>";
+FLYINFO["Gotcha (Craven Sili-Leg Variant)"]="<p>Published pattern. Catalog material names are category-level matches; match exact specifications and colors to source.</p><p><a href=\"https://charliesflybox.com/blogs/step-by-step-tutorials/gotcha\" target=\"_blank\" rel=\"noopener noreferrer\">Original recipe</a></p>";
+FLYINFO["Mathews\u2019s Zelon Midge"]="<p>Published pattern. Catalog material names are category-level matches; match exact specifications and colors to source.</p><p><a href=\"https://news.orvis.com/fly-fishing/video-how-to-tie-mathewss-zelon-midge\" target=\"_blank\" rel=\"noopener noreferrer\">Original recipe</a></p>";
 
+const buildBanner=E('div','panel');buildBanner.id='linkedBuildBanner';buildBanner.style.cssText='padding:16px;margin:12px 0;border:3px solid var(--ac)';
+buildBanner.append(E('h2','','LINKED MATERIALS — BUILD 2.3'),E('p','','Verified update: P.I.P. 5 alternatives · Shuck Yarn 3 alternatives · Congo Hair 1 recipe. Click below to inspect the new material links.'));
+const reviewBtn=E('button','chip','Show the 7 researched materials');reviewBtn.type='button';reviewBtn.onclick=()=>{matTab='Synthetics';$('am-filter').value='';$('am-status').value='';location.hash='#materials';renderAllMats();$('view-mats').scrollIntoView()};buildBanner.append(reviewBtn);document.querySelector('.wrap').prepend(buildBanner);
 refreshCatFilter();
 updateLastBackup();
 loadPH().then(()=>{if(Object.keys(PH).length)route()});
