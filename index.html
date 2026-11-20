@@ -705,6 +705,87 @@ dialog[open]{animation:pop .18s ease-out}
 .hook-foot strong{display:block;color:var(--ink);margin-bottom:var(--bench-1)}
 .hook-foot a{width:fit-content}
 @media(min-width:801px){.hook-row svg{height:3.4rem}}
+
+/* Bench Mode occupies the viewport without depending on browser fullscreen permissions. */
+.recipe-bench-launch{
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:var(--bench-3);
+  margin:var(--bench-4) 0;padding:var(--bench-3);background:var(--sf2);border:1px solid var(--ln);border-radius:var(--rad)
+}
+.recipe-bench-launch p{margin:var(--bench-1) 0 0;color:var(--mu);font-size:var(--bench-sm)}
+.recipe-bench-btn,.bench-mode-btn.primary{background:var(--bench-night);color:var(--bench-paper);border-color:var(--bench-night)}
+.recipe-bench-btn:hover,.bench-mode-btn.primary:hover{background:#214b40;border-color:#214b40}
+dialog.bench-mode{
+  inset:0;width:100%;max-width:none;height:100vh;height:100dvh;max-height:none;
+  margin:0;border:0;border-radius:0;transform:none;animation:none;box-shadow:none;background:var(--bg)
+}
+.bench-mode [hidden]{display:none!important}
+.bench-mode-header,.bench-mode-footer{flex:none;background:var(--sf);border-color:var(--ln);border-style:solid;border-width:0}
+.bench-mode-header{border-bottom-width:1px;padding-top:env(safe-area-inset-top,0px)}
+.bench-mode-footer{border-top-width:1px;padding-bottom:env(safe-area-inset-bottom,0px)}
+.bench-mode-inner{width:min(100%,68rem);margin-inline:auto;padding-inline:clamp(1rem,4vw,2.25rem)}
+.bench-mode-header .bench-mode-inner{
+  display:flex;align-items:center;justify-content:space-between;gap:var(--bench-3);padding-block:var(--bench-3)
+}
+.bench-mode-header h2{
+  font-family:"Iowan Old Style",Palatino,Georgia,serif;font-size:clamp(1.2rem,.95rem + 1.35vw,2rem);
+  line-height:1.13;overflow-wrap:anywhere
+}
+.bench-mode-kicker{margin:0 0 var(--bench-1);color:var(--ac2);font-size:var(--bench-xs);font-weight:750;letter-spacing:.13em;text-transform:uppercase}
+.bench-mode-main{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain}
+.bench-mode-grid{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(12rem,.43fr);align-items:start;
+  gap:clamp(1rem,3vw,1.75rem);padding-block:clamp(1rem,4vw,3rem)
+}
+.bench-mode-card,.bench-mode-aside>*{background:var(--sf);border:1px solid var(--ln);border-radius:var(--rad-lg);box-shadow:var(--sh1)}
+.bench-mode-card{
+  position:relative;overflow:hidden;padding:clamp(1.125rem,4.4vw,3.25rem);min-height:21rem;align-content:center
+}
+.bench-mode-card::before{content:"";position:absolute;top:0;left:0;right:0;height:.27rem;background:var(--ac)}
+.bench-step-count{color:var(--ac2);font-size:var(--bench-sm);font-weight:750;letter-spacing:.1em;text-transform:uppercase;font-variant-numeric:tabular-nums}
+.bench-mode-meter{display:flex;gap:.19rem;margin:var(--bench-3) 0 var(--bench-8)}
+.bench-mode-meter span{min-width:0;flex:1;height:.23rem;border-radius:2rem;background:var(--ln)}
+.bench-mode-meter .done{background:var(--ac)}
+.bench-mode-meter .current{height:.33rem;margin-top:-.05rem;background:var(--ac2)}
+.bench-mode-card h3{
+  font-family:"Iowan Old Style",Palatino,Georgia,serif;font-size:clamp(1.75rem,1.3rem + 2.3vw,3.25rem);
+  line-height:1.1;margin-bottom:var(--bench-3);overflow-wrap:anywhere;outline:none
+}
+.bench-mode-instruction{max-width:42ch;font-size:clamp(1.06rem,.96rem + .65vw,1.43rem);line-height:1.55;white-space:pre-line;overflow-wrap:anywhere}
+.bench-mode-materials{margin-top:var(--bench-6);padding-top:var(--bench-4);border-top:1px solid var(--ln)}
+.bench-mode-materials p{color:var(--mu);font-size:var(--bench-xs);letter-spacing:.085em;text-transform:uppercase;font-weight:700;margin:0 0 var(--bench-2)}
+.bench-mode-materials ul,.bench-recipe-mats{margin:0;padding:0;list-style:none;overflow-wrap:anywhere}
+.bench-mode-materials ul{display:flex;flex-wrap:wrap;gap:var(--bench-2)}
+.bench-mode-materials li{
+  border:1px solid var(--ln);border-radius:.43rem;padding:var(--bench-1) var(--bench-2);background:var(--sf2);
+  font-size:var(--bench-sm);color:var(--ac2);font-weight:620
+}
+.bench-mode-aside{min-width:0;display:grid;gap:var(--bench-3)}
+.bench-mode-photo{padding:var(--bench-2);margin:0}
+.bench-mode-photo img{display:block;width:100%;height:clamp(8rem,18vw,15rem);object-fit:contain;background:var(--sf2);border-radius:calc(var(--rad-lg) - .3rem)}
+.bench-mode-photo figcaption{padding:var(--bench-2) var(--bench-1) var(--bench-1);color:var(--mu);font-size:var(--bench-xs)}
+.bench-mode-kit{padding:var(--bench-3) var(--bench-4);overflow-wrap:anywhere}
+.bench-mode-kit summary{color:var(--ac2);cursor:pointer;font-weight:720;padding-block:.35rem}
+.bench-recipe-mats li{padding:var(--bench-2) 0;border-bottom:1px solid var(--ln);font-size:var(--bench-sm)}
+.bench-recipe-mats li:last-child{border:0}
+.bench-mode-note{padding:var(--bench-3) var(--bench-4);font-size:var(--bench-xs);color:var(--mu)}
+.bench-mode-footer .bench-mode-inner{display:flex;align-items:center;gap:var(--bench-3);padding-block:var(--bench-3)}
+.bench-mode-footer .bench-mode-btn{min-width:min(9rem,33%);min-height:3.25rem}
+.bench-mode-btn{flex:none;font-size:var(--bench-sm);text-align:center}
+.bench-mode-btn:disabled{opacity:.52;cursor:default}
+.bench-mode-state{flex:1;text-align:center;color:var(--mu);font-size:var(--bench-xs);margin:0}
+@media(max-width:650px){
+  .bench-mode-grid{grid-template-columns:minmax(0,1fr)}
+  .bench-mode-card{min-height:0}
+  .bench-mode-meter{margin-bottom:var(--bench-5)}
+  .bench-mode-footer .bench-mode-inner{gap:var(--bench-2)}
+  .bench-mode-footer .bench-mode-btn{min-width:0;flex:1}
+  .bench-mode-state{display:none}
+}
+@media(max-height:480px){
+  .bench-mode-header .bench-mode-inner,.bench-mode-footer .bench-mode-inner{padding-block:var(--bench-2)}
+  .bench-mode-grid{padding-block:var(--bench-3)}
+  .bench-mode-card{min-height:0}
+}
 @media(max-width:800px){
   .bench-layout{grid-template-columns:minmax(0,1.55fr) minmax(0,1fr)}
   .topnav .inner{grid-template-columns:minmax(0,1fr) auto;column-gap:var(--bench-2)}
@@ -1608,7 +1689,7 @@ const saveTied=()=>{markDirty();try{localStorage.setItem(LSTIED,JSON.stringify(t
 const saveRecent=()=>{try{localStorage.setItem(LSRECENT,JSON.stringify(recent.slice(0,8)))}catch(e){}};
 
 function defaultUI(){
-  return { matsOpen: false, catOpen: {}, closeOpen: false, closeAuto: true, flyTab: null };
+  return { matsOpen: false, catOpen: {}, closeOpen: false, closeAuto: true, flyTab: null, benchSteps: [] };
 }
 let ui=defaultUI();
 try{
@@ -1640,6 +1721,8 @@ const threadQ=t=>'fly tying thread '+t+(den(t)?' '+den(t).replace(/[≈–]/g,' 
 const hookQ=h=>'fly tying hooks size '+h;
 
 const dlg=document.createElement('dialog');document.body.append(dlg);
+let benchSession=null;
+dlg.addEventListener('close',()=>{if(!dlg.open){benchSession=null;dlg.classList.remove('bench-mode')}});
 function ext(a,href){a.href=href;a.target='_blank';a.rel='noopener noreferrer';return a}
 function act(label,fn,cls){const b=E('button','act'+(cls?' '+cls:''),label);b.type='button';b.onclick=fn;return b}
 function storeRow(q){const box=E('div','stores');STORES.forEach(([name,fn])=>box.append(ext(E('a','',name),fn(q))));return box}
@@ -1661,6 +1744,7 @@ function msg(cls,text,names,undo){
 }
 
 function shell(title){
+  benchSession=null;dlg.classList.remove('bench-mode');
   dlg.textContent='';
   const head=E('div','dlghead');
   const h=E('h2');h.id='dlgtitle';h.textContent=title;head.append(h);dlg.setAttribute('aria-labelledby','dlgtitle');
@@ -1712,21 +1796,37 @@ function showWxSettings(){
 
 
 const RECIPES={"Pheasant Tail": ["Bead: Slide the bead on, mount the hook, and start thread behind the bead.", "Tail: Tie in 6-8 pheasant tail fibers, tips out, about a shank length. Tie in wire at the rear.", "Body: Wrap the thread forward, then wrap the fibers forward as a tapered body. Counter-wrap the wire as a rib.", "Thorax: Tie in 3-4 peacock herl, wrap a fat thorax, and pull the leftover pheasant fibers over as a wingcase.", "Finish: Whip finish behind the bead and add a drop of head cement."], "Pheasant Tail Nymph": ["Bead: Slide the bead on, mount the hook, and start thread behind the bead.", "Tail: Tie in 6-8 pheasant tail fibers, tips out, about a shank length. Tie in wire at the rear.", "Body: Wrap the thread forward, then wrap the fibers forward as a tapered body. Counter-wrap the wire as a rib.", "Thorax: Tie in 3-4 peacock herl, wrap a fat thorax, and pull the leftover pheasant fibers over as a wingcase.", "Finish: Whip finish behind the bead and add a drop of head cement."], "Hare’s Ear": ["Bead: Slide the bead on, mount the hook, and start thread behind the bead.", "Tail: Pluck a small clump of guard hairs from the dubbing and tie in as a short tail. Tie in wire.", "Body: Dub the thread thinly and wrap a tapered abdomen. Counter-wrap the wire as a rib.", "Wingcase: Tie in a turkey strip, dub a fuzzy thorax, and pull the turkey over as a wingcase.", "Finish: Whip finish, then pick out the thorax with a bodkin or velcro for legs."], "Prince Nymph": ["Bead: Slide the bead on, mount the hook, and start thread behind the bead.", "Tail: Tie in two biots, splayed in a V, as the tail. Tie in wire at the rear.", "Body: Tie in 3-4 peacock herl and wrap a full body. Counter-wrap the wire to protect the herl.", "Collar: Tie in a brown hackle and take 2-3 turns as a collar, then sweep the fibers back.", "Wings: Tie two white biots over the back in a V. Trim the butts, whip finish, and add cement."], "Copper John": ["Weight: Slide the bead on and add 6-8 turns of lead on the shank. Push the lead tight to the bead.", "Tail: Start the thread behind the lead and tie in two biots as the tail. Tie in wire and a strip of thin skin.", "Body: Wrap the wire forward in tight, even turns for a segmented body, and tie it off.", "Wingcase: Add a few strands of flash, then tie in peacock herl and wrap a thorax.", "Legs & Finish: Pull the thin skin over the back as a wingcase. Tie in partridge fibers as legs, whip finish, and coat the back with UV resin."], "Zebra Midge": ["Bead: Slide the bead on, mount the hook, and start black thread behind the bead.", "Rib: Tie in the wire at the rear of the shank.", "Body: Wrap the thread forward in a smooth, thin body.", "Segment: Counter-wrap the wire in 6-8 even turns and tie it off behind the bead.", "Finish: Whip finish and add a drop of head cement or UV resin."], "Elk Hair Caddis": ["Hackle: Start the thread at the mid-shank, then tie in the brown hackle by its butt and the wire at the rear.", "Body: Dub a thin tan body forward to the mid-shank.", "Palmer: Palmer the hackle forward in open turns, then counter-wrap the wire through it to lock it in. Trim the excess.", "Wing: Cut a clump of elk hair, remove the underfur, stack it, and tie it in so the tips reach just past the bend.", "Head: Trim the butts into a short head, whip finish, and add cement."], "Parachute Adams": ["Post: Tie in a clump of calf or poly yarn as a post and wrap a few turns of thread around its base to stand it up.", "Tail: Tie in a few grizzly and brown hackle fibers as the tail.", "Body: Dub a slim, dark body from the tail up to the post.", "Hackle: Tie in a mixed grizzly and brown hackle at the post, then wrap it down around the post and tie it off.", "Finish: Whip finish under the hackle and trim the post to about shank length."], "Olive Woolly Bugger": ["Weight: Slide the cone on and add 8-10 turns of lead wire behind it. Start the thread behind the lead.", "Tail: Tie in a marabou tail about a shank long and add 2-4 strands of flash on each side.", "Body: Tie in a saddle hackle by the tip and the chenille at the rear. Wrap the chenille forward.", "Hackle: Palmer the hackle forward over the chenille in even turns and tie it off.", "Finish: Build a small thread head behind the cone, whip finish, and add cement."], "San Juan Worm": ["Tie: Start the thread at the mid-shank and wrap back to the bend.", "Chenille: Tie in a 3-inch piece of chenille at the bend and wrap forward.", "Finish: Whip finish, then trim both ends to about 1/8 inch. Melt the ends with a lighter if you want a clean taper."], "Griffith’s Gnat": ["Setup: Tie in the wire and a grizzly hackle at the bend, butt end of the hackle first.", "Body: Tie in 2-3 peacock herl and wrap a full body forward.", "Hackle: Palmer the hackle forward in open turns, tie it off, and trim the excess.", "Wire: Counter-wrap the wire forward through the hackle to lock it in. Whip finish and add cement."], "Chubby Chernobyl": ["Under body: Lay a foam strip on the bottom of the shank, tie it in at the rear, and wrap the thread forward.", "Legs: Tie in rubber legs on both sides, and a second foam strip on top with a little overhang at the rear.", "Wing: Tie in a poly yarn wing on top as a post, then fold the second foam piece forward and secure it.", "Head: Trim the foam head, tie in more legs at the front, whip finish, and add cement."], "Pat’s Rubber Legs": ["Weight: Add 8-10 turns of lead wire on the shank, push it forward, and start the thread behind it.", "Tail: Tie in a pair of rubber legs as the tail, one on each side.", "Body: Tie in chenille at the rear and wrap forward in tight turns. Tie in a pair of legs at the thorax.", "Finish: Wrap the chenille to the eye, add front legs, whip finish, and add cement."], "Egg Pattern": ["Tie: Start the thread behind the eye and wrap back to the middle of the shank.", "Yarn: Tie in a small clump of egg yarn on top, then bring it forward and tie it down in a round shape.", "Finish: Trim the yarn into a round ball, whip finish, and add cement."], "Stimulator": ["Tail: Start the thread at the bend and tie in a short tail of elk hair, then the brown hackle and the wire.", "Body: Dub the abdomen with hot orange dubbing to the mid-shank.", "Hackle: Palmer the hackle forward, counter-wrap the wire through it to lock it in, and trim the excess.", "Wing: Tie in an elk hair wing, tips reaching to the end of the tail.", "Collar: Tie in a grizzly hackle and dub a tan thorax. Wrap the hackle in front of the wing and whip finish."], "Royal Wulff": ["Tail: Tie in a clump of moose hair as the tail, about a shank long.", "Body: Wrap peacock herl at the rear, a floss band in the middle, then more peacock herl forward.", "Wings: Tie in a calf hair clump on top, divide it in two upright wings, and wrap thread between them.", "Hackle: Tie in a brown hackle and wrap 4-5 turns in front of and behind the wings. Whip finish and add cement."], "Perdigon": ["Bead: Slide the bead on and mount the hook. Start thread behind the bead and build a smooth body.", "Tail: Tie in a few coq de leon fibers as a short tail.", "Body: Add a biot or thread body and a thin strand of flash as the rib.", "Finish: Whip finish and coat the body with UV resin. Cure it for a hard, glossy shell."], "Brassie": ["Start: Start the thread behind the eye and wrap back to the bend.", "Body: Tie in wire and wrap it forward in tight, touching turns to build a smooth body.", "Finish: Tie off at the eye, whip finish, and add a small head cement or UV resin dot."], "Olive Scud": ["Bead: Slide the bead on, mount the hook, and start thread behind the bead.", "Back: Tie in a strip of thin skin and the wire at the rear.", "Body: Dub a plump, shaggy olive body forward.", "Shellback: Pull the thin skin over the back, then counter-wrap the wire to segment it. Whip finish and add cement."], "Black Ant": ["Abdomen: Dub a round abdomen at the rear of the shank.", "Wings: Tie in a little antron on top as wings.", "Hackle: Tie in a black hackle, wrap 2-3 turns at the waist, and tie it off.", "Thorax: Dub a round thorax, whip finish, and add cement."], "Pheasant Tail Soft Hackle": ["Tail: Start thread behind the eye, then tie in 6 pheasant tail fibers and wire at the bend.", "Body: Wrap the fibers forward as a slim body. Counter-wrap the wire as a rib.", "Thorax: Tie in 2 peacock herl and wrap a small thorax.", "Hackle: Tie in a partridge feather by the tip, take 2 turns, and sweep the fibers back. Whip finish and add cement."], "Slumpbuster": ["Weight: Slide the cone on and add 6-8 turns of lead behind it. Start the thread behind the lead and wrap back to the bend.", "Tail: Tie in a few strands of flash and a short tail of rabbit strip, hide-side down, at the bend.", "Body: Tie in tinsel or wire if the pattern uses it. Wrap the strip forward in tight turns, stroking the fur back after each turn.", "Finish: Tie off the strip behind the cone, whip finish, and pull out any trapped fur with a bodkin."], "Mini / Bunny Leech": ["Weight: Slide the cone on and add 6-8 turns of lead behind it. Start the thread behind the lead and wrap back to the bend.", "Tail: Tie in a few strands of flash and a short tail of rabbit strip, hide-side down, at the bend.", "Body: Tie in tinsel or wire if the pattern uses it. Wrap the strip forward in tight turns, stroking the fur back after each turn.", "Finish: Tie off the strip behind the cone, whip finish, and pull out any trapped fur with a bodkin."], "Pine Squirrel Leech": ["Weight: Slide the cone on and add 6-8 turns of lead behind it. Start the thread behind the lead and wrap back to the bend.", "Tail: Tie in a few strands of flash and a short tail of rabbit strip, hide-side down, at the bend.", "Body: Tie in tinsel or wire if the pattern uses it. Wrap the strip forward in tight turns, stroking the fur back after each turn.", "Finish: Tie off the strip behind the cone, whip finish, and pull out any trapped fur with a bodkin."], "Black Woolly Bugger": ["Weight: Slide the cone on and add 8-10 turns of lead wire behind it. Start the thread behind the lead.", "Tail: Tie in a marabou tail about a shank long, with 2-4 strands of flash on each side.", "Body: Tie in a saddle hackle by the tip, tie in the chenille (and wire for the Krystal), and wrap the chenille forward.", "Hackle: Palmer the hackle forward in even turns, lock it in with the wire if used, and tie it off.", "Head: For the Egg-Sucking Leech, wrap a fat contrasting chenille head. Whip finish and add cement."], "Egg-Sucking Leech": ["Weight: Slide the cone on and add 8-10 turns of lead wire behind it. Start the thread behind the lead.", "Tail: Tie in a marabou tail about a shank long, with 2-4 strands of flash on each side.", "Body: Tie in a saddle hackle by the tip, tie in the chenille (and wire for the Krystal), and wrap the chenille forward.", "Hackle: Palmer the hackle forward in even turns, lock it in with the wire if used, and tie it off.", "Head: For the Egg-Sucking Leech, wrap a fat contrasting chenille head. Whip finish and add cement."], "White Krystal Bugger": ["Weight: Slide the cone on and add 8-10 turns of lead wire behind it. Start the thread behind the lead.", "Tail: Tie in a marabou tail about a shank long, with 2-4 strands of flash on each side.", "Body: Tie in a saddle hackle by the tip, tie in the chenille (and wire for the Krystal), and wrap the chenille forward.", "Hackle: Palmer the hackle forward in even turns, lock it in with the wire if used, and tie it off.", "Head: For the Egg-Sucking Leech, wrap a fat contrasting chenille head. Whip finish and add cement."], "Galloup’s Dungeon": ["Tail: Tie in a rabbit strip tail and a few strands of flash at the bend.", "Body: Tie in a marabou clump, then dub the ice dub and wrap forward in two or three tapering sections.", "Legs & Head: Tie in rubber legs and spin a clump of deer hair. Stack it, pack it tight, and trim to a bullet head.", "Eyes: Glue the eyes on each side of the head, whip finish, and coat with UV resin."], "Mini Dungeon": ["Tail: Tie in a rabbit strip tail and a few strands of flash at the bend.", "Body: Tie in a marabou clump, then dub the ice dub and wrap forward in two or three tapering sections.", "Legs & Head: Tie in rubber legs and spin a clump of deer hair. Stack it, pack it tight, and trim to a bullet head.", "Eyes: Glue the eyes on each side of the head, whip finish, and coat with UV resin."], "Sculpzilla": ["Weight: Slide the cone on and add lead wire behind it. Start the thread behind the lead.", "Tail: Tie in a rabbit strip tail with flash and a marabou clump, where the pattern uses them.", "Body: Wrap chenille or ice dub forward, then tie in rubber legs at the sides.", "Head: Spin and stack deer hair, packing it tight, then trim it to a flat, wide sculpin head.", "Finish: Whip finish, add cement, and brush out any loose fibers."], "Olive Sculpin": ["Weight: Slide the cone on and add lead wire behind it. Start the thread behind the lead.", "Tail: Tie in a rabbit strip tail with flash and a marabou clump, where the pattern uses them.", "Body: Wrap chenille or ice dub forward, then tie in rubber legs at the sides.", "Head: Spin and stack deer hair, packing it tight, then trim it to a flat, wide sculpin head.", "Finish: Whip finish, add cement, and brush out any loose fibers."], "Trevor’s Sculpin": ["Weight: Slide the cone on and add lead wire behind it. Start the thread behind the lead.", "Tail: Tie in a rabbit strip tail with flash and a marabou clump, where the pattern uses them.", "Body: Wrap chenille or ice dub forward, then tie in rubber legs at the sides.", "Head: Spin and stack deer hair, packing it tight, then trim it to a flat, wide sculpin head.", "Finish: Whip finish, add cement, and brush out any loose fibers."], "Baby Gonga": ["Eyes: Tie the eyes on the hook shank near the front so the fly rides hook-up.", "Tail: Tie in a marabou tail with flash on both sides.", "Body: Dub the ice dub forward and wrap it in a tapered body. Palmer a saddle hackle if the pattern calls for it.", "Head: Add rubber legs and deer hair for the Baby Gonga, or a collar of flash for the Double Screamer.", "Finish: Whip finish and coat the head and eyes with UV resin."], "Double Screamer": ["Eyes: Tie the eyes on the hook shank near the front so the fly rides hook-up.", "Tail: Tie in a marabou tail with flash on both sides.", "Body: Dub the ice dub forward and wrap it in a tapered body. Palmer a saddle hackle if the pattern calls for it.", "Head: Add rubber legs and deer hair for the Baby Gonga, or a collar of flash for the Double Screamer.", "Finish: Whip finish and coat the head and eyes with UV resin."], "Kreelex": ["Eyes: Tie the eyes on top of the shank near the front.", "Body: Wrap the tinsel from the bend to the eye to build a flashy body.", "Wing: Tie in marabou, then bucktail on top and bottom, and a few strands of flash.", "Finish: Build a neat thread head, whip finish, and coat with UV resin."], "Muddler Minnow": ["Tail: Tie in a small slip of turkey quill at the bend.", "Body: Wrap tinsel forward, then tie in a bucktail underwing and a turkey slip on each side.", "Head: Spin a clump of deer hair, push it back, and repeat. Trim it into a rounded muddler head with a flat bottom.", "Finish: Whip finish behind the eye and add cement."], "Clouser Minnow": ["Eyes: Tie the eyes on top of the shank just behind the eye. The hook rides point-up.", "Underwing: Flip the hook, tie in white bucktail under the shank, then a few strands of flash.", "Top Wing: Tie in a longer clump of darker bucktail on top.", "Finish: Build a smooth thread head, whip finish, and coat with UV resin."], "Deceiver": ["Tail: Tie in a bunch of long saddle hackles, splayed outward, at the bend, with flash between them.", "Body: Wrap tinsel or thread forward for a smooth body.", "Collar: Tie in a thick bucktail collar on top and bottom.", "Finish: Whip finish and coat the head with UV resin."], "Matuka": ["Wing: Tie in a pair of saddle hackles on top of the shank. Tie in the wire and chenille at the bend.", "Body: Wrap the chenille forward.", "Bind Down: Pull the hackle over the body and spiral the wire forward through the feather in 4-5 turns.", "Finish: Tie off, trim the butts, whip finish, and add cement."], "Mickey Finn": ["Body: Tie in tinsel at the bend and wrap forward to the eye.", "Wing: Tie in a sparse bucktail wing in the pattern colors (yellow, red, yellow for the Mickey Finn).", "Finish: Build a neat head, whip finish, and add cement."], "Black Nosed Dace": ["Body: Tie in tinsel at the bend and wrap forward to the eye.", "Wing: Tie in a sparse bucktail wing in the pattern colors (yellow, red, yellow for the Mickey Finn).", "Finish: Build a neat head, whip finish, and add cement."], "Jig Zonker": ["Bead: Slide the jig bead on, mount the hook, and start the thread behind the bead.", "Body: Tie in tinsel and wrap forward.", "Wing: Tie a rabbit strip on top at the rear, then flash on each side.", "Finish: Pull the strip forward to the head, tie it down, and whip finish."], "Rabbit Zonker": ["Lead: Add lead wire to the shank and start the thread behind the eye.", "Body: Tie in tinsel and wrap a body, then tie a rabbit strip on top at the rear and secure it at the head.", "Collar: Wrap a saddle hackle collar, whip finish, and add cement."], "Mouse": ["Tail: Tie in a rabbit strip as the tail, with the hide on top.", "Body: Tie a foam strip on top, then a deer hair clump on the shank.", "Head: Trim the hair to a mouse-head shape and fold the foam over as a back.", "Finish: Whip finish and add cement."], "Partridge & Black": ["Body: Wrap a thin, smooth body of silk or thread in the color named in the pattern.", "Hackle: Tie in a partridge feather by the tip, take 2 turns, and stroke the fibers back.", "Finish: Whip finish and add cement."], "Partridge & Gray": ["Body: Wrap a thin, smooth body of silk or thread in the color named in the pattern.", "Hackle: Tie in a partridge feather by the tip, take 2 turns, and stroke the fibers back.", "Finish: Whip finish and add cement."], "Partridge & Green": ["Body: Wrap a thin, smooth body of silk or thread in the color named in the pattern.", "Hackle: Tie in a partridge feather by the tip, take 2 turns, and stroke the fibers back.", "Finish: Whip finish and add cement."], "Partridge & Orange": ["Body: Wrap a thin, smooth body of silk or thread in the color named in the pattern.", "Hackle: Tie in a partridge feather by the tip, take 2 turns, and stroke the fibers back.", "Finish: Whip finish and add cement."], "Partridge & Yellow": ["Body: Wrap a thin, smooth body of silk or thread in the color named in the pattern.", "Hackle: Tie in a partridge feather by the tip, take 2 turns, and stroke the fibers back.", "Finish: Whip finish and add cement."], "Hare’s Ear Soft Hackle": ["Body: Tie in wire and dub a slim body. Counter-wrap the wire as a rib.", "Hackle: Tie in a partridge feather by the tip, take 2 turns, and sweep the fibers back.", "Finish: Whip finish and add cement."], "Prince Soft Hackle": ["Tail: Tie in two biots as the tail and tie in wire.", "Body: Tie in peacock herl and wrap a body. Counter-wrap the wire as a rib.", "Hackle: Tie in a soft brown hackle, take 2 turns, and sweep the fibers back. Whip finish and add cement."], "Royal Coachman Wet": ["Tail: Tie in a few golden pheasant tippet fibers as the tail.", "Body: Wrap peacock herl at each end with a red floss band in the middle.", "Wing: Tie in matched slips of duck quill on top of the shank as a wing.", "Hackle: Tie in a brown hackle as a beard, whip finish, and add cement."], "Zug Bug": ["Tail: Tie in a few peacock sword fibers as the tail.", "Body: Tie in tinsel, then peacock herl, and wrap the herl as a body. Counter-wrap the tinsel.", "Hackle: Tie in a brown hackle as a beard.", "Wing: Tie in a mallard flank slip on top as a wingcase and whip finish."], "Woolly Worm": ["Setup: Tie in the wire and a brown hackle at the bend, then the chenille.", "Body: Wrap the chenille forward.", "Hackle: Palmer the hackle forward, lock it with the wire, whip finish, and add cement."], "Girdle Bug": ["Legs: Tie in rubber legs at the bend and at the middle of the shank.", "Body: Tie in chenille and wrap forward, covering the leg bases.", "Finish: Tie in front legs, whip finish, and trim the legs even."], "BWO Comparadun": ["Tail: Tie in a few microfibbet tails, splayed, at the bend.", "Body: Dub a slim body forward to the mid-shank.", "Wing: Tie in a clump of deer hair, tips forward. Flare it into a half-fan, then raise it and wrap thread tight at its base.", "Finish: Whip finish and add cement."], "PMD Comparadun": ["Tail: Tie in a few microfibbet tails, splayed, at the bend.", "Body: Dub a slim body forward to the mid-shank.", "Wing: Tie in a clump of deer hair, tips forward. Flare it into a half-fan, then raise it and wrap thread tight at its base.", "Finish: Whip finish and add cement."], "Trico Spinner": ["Tail: Tie in two long microfibbet tails at the bend.", "Body: Dub a thin body forward and leave room for the wings.", "Wings: Tie in a clump of antron on each side, spent, and wrap thread to hold them out flat.", "Finish: Whip finish and add cement."], "Rusty Spinner": ["Tail: Tie in two long microfibbet tails at the bend.", "Body: Dub a thin body forward and leave room for the wings.", "Wings: Tie in a clump of antron on each side, spent, and wrap thread to hold them out flat.", "Finish: Whip finish and add cement."], "Mother’s Day Caddis": ["Hackle: Start the thread at the mid-shank, then tie in the brown hackle by its butt and the wire at the rear.", "Body: Dub a thin tan body forward to the mid-shank.", "Palmer: Palmer the hackle forward in open turns, then counter-wrap the wire through it to lock it in. Trim the excess.", "Wing: Cut a clump of elk hair, remove the underfur, stack it, and tie it in so the tips reach just past the bend.", "Head: Trim the butts into a short head, whip finish, and add cement."], "Humpy": ["Tail: Tie in a clump of elk hair as the tail and tie in floss at the bend.", "Body: Wrap the floss into a body, then fold the elk hair forward over the top to make the hump.", "Wing: Divide the leftover tips into wings, wrap thread to hold them.", "Hackle: Tie in two hackles (brown and grizzly) and wrap them in front of the wings. Whip finish and add cement."], "Mercury Black Beauty": ["Bead: Slide the bead on, mount the hook, and start the thread behind the bead.", "Tail: Tie in a few microfibbet fibers as the tail and tie in the wire.", "Body: Dub a thin body. Counter-wrap the wire as a rib.", "Finish: Whip finish and add cement."], "Frenchie": ["Bead: Slide the bead on, mount the hook, and start the thread behind the bead.", "Tail: Tie in a few pheasant tail fibers as a short tail and tie in the wire.", "Body: Wrap the pheasant fibers forward as a body, then counter-wrap the wire as a rib.", "Collar: Dub a hot-spot collar behind the bead, whip finish, and add cement."]};
-function fixedStep(t){const i=t.indexOf(": ");return "<strong>"+t.slice(0,i)+":</strong> "+t.slice(i+2)}
-function showRecipe(n){
+const BENCH_MATERIAL_ALIASES={
+  bead:['bead','beads'],tungsten_bead:['bead','beads'],slotted_bead:['bead','beads'],wire:['ribbing wire','fine wire','copper wire','gold wire','wire'],
+  thin_skin:['thin skin','scud back'],ostrich:['ostrich herl','ostrich herls'],uv_ice_dub:['uv dubbing','uv ice dub'],
+  ph_tail:['pheasant tail fibers','pheasant tail fibres'],uv_resin:['uv resin','uv cement'],rubber_legs:['rubber legs','sili legs'],
+  elk:['elk hair'],deer:['deer hair'],cdc:['cdc','cdc feathers'],lead:['lead wire','lead wraps']
+};
+const benchWords=value=>' '+value.toLowerCase().replace(/[’']/g,'').replace(/[^a-z0-9]+/g,' ').trim()+' ';
+function recipeFor(n){
   const f=D.F.find(x=>x[0]===n);
-  const mats=f[2].split(' ');
-  const title=n+' — Recipe';
-  const body=shell(title);
-  const sub=E('p','sub','Hand-written tying order. Adjust to your own technique.');body.append(sub);
+  if(!f)return null;
+  const mats=[...new Set(f[2].split(' ').filter(Boolean))];
+  const written=Object.hasOwn(RECIPES,n)&&Array.isArray(RECIPES[n])&&RECIPES[n].length>0;
   const sharedSource=!isMyFly(n)&&ROCKIES_BY_NAME.get(n)?.url;
-  if(sharedSource)body.append(ext(E('a','act','Original recipe / demonstration'),sharedSource));
-  const s=E('div');
-  let step=1;
-  const addStep=(txt)=>{const d=E('div','recipe-step');d.append(E('div','recipe-num',step++));const t=E('div','recipe-text');t.innerHTML=txt;d.append(t);s.append(d)};
+  const steps=[];
+  const add=(title,instruction,materials=[])=>steps.push({title,instruction,materials:[...new Set(materials)]});
   const threadSize=thread(f), hookSize=hooks(f);
-  addStep(`<strong>Prep the Hook:</strong> Mount ${hookSize?'a size '+hookSize+' hook':'your hook'} in the vise${threadSize?', with '+threadSize+' thread':''}.`);
-  if(RECIPES[n]){ RECIPES[n].forEach(t=>addStep(fixedStep(t))); }
+  const prep=[hookSize?'Hook: '+hookSize:'Hook',threadSize?'Thread: '+threadSize:'Tying thread'];
+  add('Prep the Hook',`Mount ${hookSize?'a size '+hookSize+' hook':'your hook'} in the vise${threadSize?', with '+threadSize+' thread':''}.`,prep);
+  if(written){
+    RECIPES[n].forEach((t,i)=>{
+      if(typeof t!=='string')return;
+      const split=t.indexOf(': '),title=split>0?t.slice(0,split):'Tying step '+(i+1),instruction=split>0?t.slice(split+2):t;
+      const words=benchWords(title+' '+instruction);
+      const matches=mats.filter(id=>{
+        const aliases=Object.hasOwn(BENCH_MATERIAL_ALIASES,id)?BENCH_MATERIAL_ALIASES[id]:[];
+        const terms=lab(id).split(/\s*\/\s*/).concat(aliases);
+        return terms.some(term=>term.length>2&&words.includes(benchWords(term)));
+      });
+      add(title,instruction,matches.map(lab));
+    });
+  }
   else{
   const used=new Set(), pick=l=>{const r=mats.filter(m=>l.includes(m)&&!used.has(m));r.forEach(m=>used.add(m));return r};
   const weightMats=pick(['cone','bead','lead','eyes']);
@@ -1738,19 +1838,40 @@ function showRecipe(n){
   const hackleMats=pick(['brown_hackle','grizzly','dun_hackle','black_hackle','ginger_hackle','partridge','white_hackle','saddle']);
   const extra=pick(['flash','rubber_legs','thin_skin','rabbit_strip','marabou','uv_resin']);
   const L=a=>a.map(lab).join(' and ');
-  if(weightMats.length) addStep(`<strong>Weight:</strong> Mount ${L(weightMats)} before anything else. Lead goes on the bare shank, pushed up behind the bead or cone.`);
-  if(tailMats.length) addStep(`<strong>Tail:</strong> Tie in ${L(tailMats)} at the bend, about a shank length.`);
-  if(extra.includes('marabou')||extra.includes('rabbit_strip')) addStep(`<strong>Tail / Wing Material:</strong> Tie in ${L(extra.filter(m=>['marabou','rabbit_strip'].includes(m)))} at the bend.`);
-  if(ribMats.length) addStep(`<strong>Rib:</strong> Tie in ${L(ribMats)} at the rear, leaving it hanging.`);
-  if(bodyMats.length) addStep(`<strong>Body:</strong> Build the body with ${L(bodyMats)}, tapering it toward the front.`);
-  if(ribMats.length) addStep(`<strong>Rib:</strong> Counter-wrap ${L(ribMats)} forward in even turns to segment the body, then tie it off.`);
-  if(wingMats.length) addStep(`<strong>Wing / Post:</strong> Tie in ${L(wingMats)} on top of the shank as wing, wingcase, or post.`);
-  if(hackleMats.length) addStep(`<strong>Hackle:</strong> Tie in and wrap ${L(hackleMats)}${n.includes('Bugger')||n.startsWith('Woolly')?' (palmer it up the body)':''}.`);
+  if(weightMats.length) add('Weight',`Mount ${L(weightMats)} before anything else.${weightMats.includes('lead')?' Lead goes on the bare shank, behind any bead or cone.':''}`,weightMats.map(lab));
+  if(tailMats.length) add('Tail',`Tie in ${L(tailMats)} at the bend, about a shank length.`,tailMats.map(lab));
+  const soft=extra.filter(m=>m==='marabou'||m==='rabbit_strip');
+  if(soft.length) add('Tail / Wing Material',`Tie in ${L(soft)} at the bend.`,soft.map(lab));
+  if(ribMats.length) add('Rib',`Tie in ${L(ribMats)} at the rear, leaving it hanging.`,ribMats.map(lab));
+  if(bodyMats.length) add('Body',`Build the body with ${L(bodyMats)}, tapering it toward the front.`,bodyMats.map(lab));
+  if(ribMats.length) add('Rib',`Counter-wrap ${L(ribMats)} forward in even turns to segment the body, then tie it off.`,ribMats.map(lab));
+  if(wingMats.length) add('Wing / Post',`Tie in ${L(wingMats)} on top of the shank as wing, wingcase, or post.`,wingMats.map(lab));
+  if(hackleMats.length) add('Hackle',`Tie in and wrap ${L(hackleMats)}${n.includes('Bugger')||n.startsWith('Woolly')?' (palmer it up the body)':''}.`,hackleMats.map(lab));
   const ex=extra.filter(m=>!['marabou','rabbit_strip'].includes(m));
-  if(ex.length) addStep(`<strong>Accents:</strong> Add ${L(ex)} where the pattern calls for it.`);
-  addStep(`<strong>Finish:</strong> Whip finish, trim, and add head cement or UV resin.`);
-  sub.textContent='A generic tying order built from this fly\u2019s materials. Hand-written recipes exist for the most common patterns.';
+  if(ex.length) add('Accents',`Add ${L(ex)} where the pattern calls for it.`,ex.map(lab));
+  add('Finish','Whip finish, trim, and add head cement or UV resin.');
   }
+  return {n,f,mats,prep,steps,written,sharedSource};
+}
+
+function showRecipe(n){
+  const recipe=recipeFor(n);if(!recipe)return;
+  const {f,mats,steps,written,sharedSource}=recipe;
+  const body=shell(n+' — Recipe');
+  body.append(E('p','sub',written?'Hand-written tying order. Adjust to your own technique.':'A generic tying order built from this fly’s materials. Hand-written recipes exist for the most common patterns.'));
+  if(sharedSource)body.append(ext(E('a','act','Original recipe / demonstration'),sharedSource));
+  const launch=E('div','recipe-bench-launch'),copy=E('div');
+  const saved=benchStepFor(recipe);
+  copy.append(E('strong','','Bench Mode'),E('p','',saved?'Step '+(saved+1)+' of '+steps.length+' saved.':'Full screen, one step at a time.'));
+  const start=E('button','bench-secondary recipe-bench-btn',saved?'Resume Bench Mode':'Start Bench Mode');
+  start.type='button';start.onclick=()=>showBenchMode(recipe,saved);
+  launch.append(copy,start);body.append(launch);
+  const s=E('div');
+  steps.forEach(({title,instruction},i)=>{
+    const d=E('div','recipe-step'),t=E('div','recipe-text');
+    t.append(E('strong','',title+':'),' '+instruction);
+    d.append(E('div','recipe-num',String(i+1)),t);s.append(d);
+  });
   body.append(s);
   const copyBtn = act('Copy shopping list', async ()=>{
     const lines = ['Materials for '+n+' (thread '+thread(f)+', hook '+hooks(f)+'):'];
@@ -1764,6 +1885,102 @@ function showRecipe(n){
   const leftWrap=E('div','left');leftWrap.append(copyBtn);
   foot.append(leftWrap, back, close, printBtn);dlg.append(foot);
   if(!dlg.open)dlg.showModal();
+  return start;
+}
+
+function benchStepFor({n,steps}){
+  const entry=Array.isArray(ui.benchSteps)&&ui.benchSteps.find(row=>Array.isArray(row)&&row[0]===n);
+  const index=entry?.[1];
+  return Number.isInteger(index)?Math.max(0,Math.min(index,steps.length-1)):0;
+}
+function rememberBenchStep(name,index){
+  const prev=Array.isArray(ui.benchSteps)?ui.benchSteps:[];
+  ui.benchSteps=prev.filter(row=>Array.isArray(row)&&typeof row[0]==='string'&&Number.isInteger(row[1])&&row[0]!==name);
+  if(index>0)ui.benchSteps.unshift([name,index]);
+  ui.benchSteps=ui.benchSteps.slice(0,500);
+  saveUI();
+}
+function showBenchMode(recipe,start){
+  const {n,steps,mats,prep,written}=recipe;
+  dlg.textContent='';dlg.classList.add('bench-mode');
+  dlg.setAttribute('aria-labelledby','benchModeTitle');
+  let index=start,complete=false;
+  const makeBtn=(label,fn,primary=false)=>{
+    const b=E('button','bench-secondary bench-mode-btn'+(primary?' primary':''),label);
+    b.type='button';b.onclick=fn;return b;
+  };
+  const exit=()=>showRecipe(n)?.focus();
+  const header=E('header','bench-mode-header'),headerInner=E('div','bench-mode-inner'),titles=E('div');
+  const title=E('h2','',n);title.id='benchModeTitle';
+  titles.append(E('p','bench-mode-kicker','Bench Mode'),title);
+  headerInner.append(titles,makeBtn('Back to recipe',exit));header.append(headerInner);
+
+  const scroller=E('div','bench-mode-main'),grid=E('div','bench-mode-inner bench-mode-grid'),card=E('section','bench-mode-card');
+  const count=E('p','bench-step-count'),meter=E('div','bench-mode-meter');
+  meter.setAttribute('aria-hidden','true');
+  const marks=steps.map(()=>E('span'));meter.append(...marks);
+  const stepTitle=E('h3'),instruction=E('p','bench-mode-instruction');
+  count.id='benchStepCount';stepTitle.setAttribute('aria-describedby',count.id);stepTitle.tabIndex=-1;
+  const directions=E('div');directions.setAttribute('aria-live','polite');directions.setAttribute('aria-atomic','true');
+  directions.append(stepTitle,instruction);
+  const materialBox=E('div','bench-mode-materials'),materials=E('ul');
+  const materialLabel=E('p','','Recipe materials for this step');materialLabel.id='benchStepMaterials';
+  materials.setAttribute('aria-labelledby',materialLabel.id);
+  materialBox.append(materialLabel,materials);card.append(count,meter,directions,materialBox);
+
+  const aside=E('aside','bench-mode-aside');
+  aside.setAttribute('aria-label','Recipe reference');
+  const src=photoFor(n);
+  if(src){
+    const figure=E('figure','bench-mode-photo'),image=E('img');
+    image.alt=n;image.addEventListener('error',()=>figure.remove(),{once:true});image.src=src;
+    figure.append(image,E('figcaption','','Reference photo'));aside.append(figure);
+  }
+  const kit=E('details','bench-mode-kit'),kitList=E('ul','bench-recipe-mats');
+  kit.append(E('summary','','All recipe materials'),kitList);
+  [...prep,...mats.map(lab)].forEach(label=>kitList.append(E('li','',label)));
+  aside.append(kit);
+  if(!written)aside.append(E('p','bench-mode-note','Generic tying order based on this fly’s listed materials.'));
+  grid.append(card,aside);scroller.append(grid);
+
+  const footer=E('footer','bench-mode-footer'),footerInner=E('div','bench-mode-inner');
+  const previous=makeBtn('Previous step',()=>go(-1)),next=makeBtn('Next step',()=>go(1),true);
+  const status=E('p','bench-mode-state','Use ← and → to move between steps.');
+  footerInner.append(previous,status,next);footer.append(footerInner);
+  dlg.append(header,scroller,footer);
+
+  function renderStep(focus=false){
+    const step=steps[index];
+    count.textContent=complete?'Recipe complete':`Step ${index+1} of ${steps.length}`;
+    marks.forEach((mark,i)=>{mark.className=complete||i<index?'done':i===index?'current':''});
+    stepTitle.textContent=complete?'Fly finished':step.title;
+    instruction.textContent=complete?'That’s the last step. Review it, return to the recipe, or start another fly.':step.instruction;
+    materialBox.hidden=complete||!step.materials.length;
+    materials.replaceChildren(...(complete?[]:step.materials.map(label=>E('li','',label))));
+    previous.textContent=complete?'Review last step':'Previous step';
+    previous.disabled=!complete&&index===0;
+    next.textContent=complete?'Tie another':index===steps.length-1?'Finish':'Next step';
+    scroller.scrollTop=0;
+    if(focus||document.activeElement===previous&&previous.disabled)stepTitle.focus({preventScroll:true});
+  }
+  function go(delta){
+    if(complete){
+      complete=false;
+      if(delta>0)index=0;
+      rememberBenchStep(n,index);
+      renderStep(true);
+      return;
+    }
+    if(delta>0&&index===steps.length-1){
+      complete=true;rememberBenchStep(n,0);renderStep(true);return;
+    }
+    const nextIndex=Math.max(0,index+delta);
+    if(nextIndex===index)return;
+    index=nextIndex;rememberBenchStep(n,index);renderStep();
+  }
+  benchSession={exit,go};
+  if(!dlg.open)dlg.showModal();
+  renderStep(true);
 }
 
 function pushRecent(n){
@@ -2190,6 +2407,7 @@ function setView(v){
   });
 }
 function route(event){
+  if(event&&benchSession&&dlg.open)dlg.close();
   const h=location.hash.replace(/^#\/?/,'');
   const routes=new Map([['all','all'],['materials','mats'],['my-materials','inventory'],['guide','guide'],['now','now']]);
   setView(routes.get(h)||'home');
@@ -2217,6 +2435,13 @@ shortcutsEl.addEventListener('click',(e)=>{ if(e.target===shortcutsEl) hideShort
 document.addEventListener('keydown',(e)=>{
   const tag=(e.target&&e.target.tagName)||'';
   const inField=/^(INPUT|TEXTAREA|SELECT)$/.test(tag)||(e.target&&e.target.isContentEditable);
+  if(dlg.open&&benchSession){
+    if(e.key==='Escape'){e.preventDefault();benchSession.exit();return}
+    if(!inField&&!e.altKey&&!e.ctrlKey&&!e.metaKey&&!e.shiftKey&&!e.repeat&&(e.key==='ArrowRight'||e.key==='ArrowLeft')){
+      e.preventDefault();benchSession.go(e.key==='ArrowRight'?1:-1);
+    }
+    return;
+  }
   if(e.key==='Escape'){
     if(shortcutsEl.classList.contains('on')){hideShortcuts();return}
     if(dlg.open){dlg.close();return}
@@ -2708,7 +2933,7 @@ ROCKIES_RECIPES.forEach(([name,type,mats,thread,hook,colors,groups,imitates,fish
     +'<h4>How to Fish It</h4><p>'+safeCatalogText(fishing)+'</p>'
     +'<p><strong>Colors:</strong> '+safeCatalogText(colors)+'</p>'
     +'<p><a href="'+safeCatalogText(url)+'" target="_blank" rel="noopener noreferrer">Original recipe / demonstration</a></p>';
-  ROCKIES_BY_NAME.set(name,{fly:[name,type,mats,thread,hook],colors,hatches:hatchNames,steps:steps.map(safeCatalogText),url,info});
+  ROCKIES_BY_NAME.set(name,{fly:[name,type,mats,thread,hook],colors,hatches:hatchNames,steps:steps.slice(),url,info});
   restoreRockiesRecipe(name);
 });
 rebuild();
