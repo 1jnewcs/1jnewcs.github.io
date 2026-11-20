@@ -538,7 +538,7 @@ dialog[open]{animation:pop .18s ease-out}
 .topnav .navbtn{border:1px solid var(--ln);background:var(--sf);border-radius:8px;padding:4px 12px;box-shadow:var(--sh1);font-size:.82rem;color:var(--mu)}
 .topnav .navbtn:hover{border-color:var(--ac);color:var(--ink)}
 .topnav .navbtn.needs{border-color:var(--nl)}
-.topnav .navbtn.needs::after{content:" •";color:var(--nl);font-weight:700}
+.topnav .navbtn.needs::after{content:"";display:inline-block;width:.4rem;height:.4rem;margin-left:.35rem;margin-bottom:.08rem;border-radius:50%;background:var(--nl)}
 .sub-badge{display:inline-block;margin-left:6px;font-size:.68rem;text-transform:uppercase;letter-spacing:.04em;color:var(--nt);border:1px solid var(--nl);border-radius:999px;padding:1px 7px;vertical-align:middle;font-weight:600;background:color-mix(in srgb,var(--nl) 12%,transparent)}
 .flycard{background:linear-gradient(145deg,var(--sf),var(--sf2))}
 .flycard .thumb{width:48px;height:48px;border-radius:8px;object-fit:cover;border:1px solid var(--ln);float:right;margin:0 0 4px 8px;background:var(--sf2)}
@@ -586,18 +586,175 @@ dialog[open]{animation:pop .18s ease-out}
 .bead-visual{display:inline-block;background:var(--ink);border-radius:50%;box-shadow:inset -2px -2px 4px rgba(255,255,255,.2),inset 2px 2px 4px rgba(0,0,0,.5)}
 .ver{text-align:center;color:var(--mu);font-size:.75rem;margin:24px 0 0}
 @media print{.ver,.navbtn{display:none!important}}
+
+/* Tying bench, inventory, and illustrated reference */
+:root{
+  --bench-xs:.75rem;--bench-sm:.875rem;--bench-lede:1rem;
+  --bench-title:clamp(1.85rem,1.35rem + 2.2vw,2.8rem);
+  --bench-1:.25rem;--bench-2:.5rem;--bench-3:.75rem;--bench-4:1rem;
+  --bench-5:1.25rem;--bench-6:1.5rem;--bench-8:2rem;--bench-10:2.5rem;
+  --bench-night:#14352e;--bench-paper:#f2f7ef;--bench-lichen:#c2d8c8;
+}
+.topnav .inner{display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:var(--bench-4);row-gap:var(--bench-2)}
+.nav-pages,.nav-tools{display:flex;min-width:0;gap:var(--bench-1);align-items:center;flex-wrap:wrap}
+.nav-pages .navlink{text-align:center;white-space:nowrap}
+.nav-tools{grid-column:1/-1;gap:var(--bench-2)}
+.nav-weather{justify-self:end;min-width:0}
+#msg{position:fixed;inset:auto 1rem max(1rem,env(safe-area-inset-bottom)) auto;width:min(28rem,calc(100% - 2rem));max-height:32vh;overflow:auto;margin:0;padding-right:2.6rem}
+.msg-dismiss{position:absolute;top:.35rem;right:.45rem;border:0;background:transparent;color:inherit;width:1.7rem;height:1.7rem;font-size:1.2rem;border-radius:.35rem}
+.msg-dismiss:hover{background:color-mix(in srgb,currentColor 10%,transparent)}
+.bench-hero{
+  isolation:isolate;position:relative;overflow:hidden;
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(14rem,.55fr);gap:var(--bench-6);
+  align-items:center;padding:clamp(1.25rem,4vw,2.75rem);margin-bottom:var(--bench-5);
+  color:var(--bench-paper);background:linear-gradient(110deg,#122e29,var(--bench-night) 60%,#23483b);
+  border:1px solid #365a49;border-radius:var(--rad-lg);box-shadow:var(--sh2)
+}
+.bench-hero>div{position:relative;z-index:1;min-width:0}
+.bench-water{position:absolute;z-index:0;inset:auto -6% -55% auto;width:min(63%,43rem);height:auto;color:#a6d1ae;opacity:.19;pointer-events:none}
+.bench-kicker,.hook-kicker{margin:0 0 var(--bench-2);font-size:var(--bench-xs);font-weight:750;letter-spacing:.12em;text-transform:uppercase}
+.bench-kicker{color:#d5c390}
+.bench-hero h1#head,.bench-page-title h1{font-size:var(--bench-title);line-height:1.08}
+.bench-intro{font-size:var(--bench-lede);margin:var(--bench-3) 0 var(--bench-5);max-width:43ch;color:var(--bench-lichen)}
+.bench-actions{display:flex;align-items:center;gap:var(--bench-2);flex-wrap:wrap}
+.bench-action,.bench-secondary{
+  display:inline-flex;align-items:center;justify-content:center;gap:var(--bench-2);
+  padding:var(--bench-2) var(--bench-3);min-height:2.6rem;font-size:var(--bench-sm);
+  font-weight:680;text-decoration:none;border-radius:var(--rad);border:1px solid var(--ln)
+}
+.bench-action{background:var(--bench-paper);color:var(--bench-night);border-color:var(--bench-paper)}
+.bench-action:hover{background:#dcebdd}
+.bench-action.alt{background:transparent;color:var(--bench-paper);border-color:#739083}
+.bench-action.alt:hover{background:#315347}
+.bench-hero :is(a,button):focus-visible{outline-color:#d5c390}
+.bench-readout{padding:var(--bench-4) var(--bench-5);border:1px solid #658578;border-radius:var(--rad);background:#102e27d9}
+.bench-readout-title{margin:0;color:var(--bench-lichen);font-size:var(--bench-xs);letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+.bench-ready{display:flex;align-items:baseline;gap:var(--bench-2);margin:0;font-variant-numeric:tabular-nums}
+.bench-ready strong{font-family:"Iowan Old Style",Palatino,Georgia,serif;font-size:clamp(2.75rem,6vw,4.1rem);font-weight:600;line-height:1.15}
+.bench-ready span{color:var(--bench-lichen);font-size:var(--bench-sm)}
+.bench-meter{margin:var(--bench-2) 0 var(--bench-3);background:#37584c;height:.35rem;border-radius:1rem;overflow:hidden}
+.bench-meter span{display:block;width:0;height:100%;background:#dfc88f;border-radius:1rem}
+.bench-readout dl{display:grid;grid-template-columns:1fr 1fr;gap:var(--bench-3);margin:0}
+.bench-readout dl div{display:flex;flex-direction:column-reverse}
+.bench-readout dd{margin:0;font-size:var(--bench-lede);font-weight:720;color:var(--bench-paper)}
+.bench-readout dt{color:var(--bench-lichen);font-size:var(--bench-xs)}
+.bench-layout{display:grid;grid-template-columns:minmax(0,1.9fr) minmax(0,1fr);gap:var(--bench-4);align-items:start}
+.bench-layout>*,.bench-side>*{min-width:0}
+.bench-side{display:grid;gap:var(--bench-4)}
+.bench-layout .panel,.bench-side #cardBackup{margin:0}
+#fliesPanel,.hook-reference,#benchPanel{scroll-margin-top:7rem}
+.bench-heading{display:flex;gap:var(--bench-3);align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+.bench-heading h2,.hook-reference h2{font-size:clamp(1.35rem,1.15rem + .8vw,1.8rem);line-height:1.2}
+.bench-heading .sub,.bench-side .sub{font-size:var(--bench-sm)}
+.bench-secondary{color:var(--ac2);background:var(--sf);white-space:normal}
+.bench-secondary:hover{border-color:var(--ac);background:var(--sf2)}
+.bench-filter{margin:var(--bench-4) 0 var(--bench-3)}
+.filterbar :is(input,select){min-width:0}
+.bench-filter input{min-width:8rem}
+.bench-filter select{max-width:100%}
+.bench-suboptions{display:flex;align-items:center;gap:var(--bench-3);justify-content:space-between;flex-wrap:wrap;margin-bottom:var(--bench-4)}
+.bench-suboptions a,.hook-foot a{color:var(--ac2);font-weight:650;font-size:var(--bench-sm);text-underline-offset:.2em}
+.bench-side #closeAcc{margin:var(--bench-3) 0 0}
+.near-preview{padding:0;list-style:none;margin:var(--bench-3) 0 0}
+.near-preview li{display:flex;justify-content:space-between;align-items:baseline;gap:var(--bench-3);padding:var(--bench-2) 0;border-bottom:1px solid var(--ln)}
+.near-preview li:last-child{border-bottom:0}
+.near-preview .lnk{text-align:left;color:var(--ac2);font-weight:650}
+.near-preview small{flex:none;color:var(--mu);font-size:var(--bench-xs)}
+.bench-utilities{display:grid;gap:var(--bench-2)}
+.bench-utilities .bench-secondary{width:100%}
+.bench-page-title{margin:0 0 var(--bench-4)}
+.bench-page-title .sub{margin:var(--bench-2) 0 var(--bench-3)}
+.inventory-intro{display:flex;justify-content:space-between;align-items:center;gap:var(--bench-3);flex-wrap:wrap}
+.acc-header{display:flex;align-items:center}
+.acc-header .acc-head{flex:1;min-width:0}
+.acc-header .acc-all{flex:none;margin-right:var(--bench-2);padding:var(--bench-1) var(--bench-2);background:var(--sf2);border:1px solid var(--ln);color:var(--mu);border-radius:.4rem;font-size:var(--bench-xs)}
+.acc-header .acc-all:hover{border-color:var(--ac);color:var(--ac2)}
+#view-inventory .quickadd{margin:var(--bench-4) 0}
+#view-inventory .quickadd input{min-height:2.75rem}
+#view-inventory #health .meta{font-size:var(--bench-sm)}
+.guide-jump{display:flex;gap:var(--bench-2);flex-wrap:wrap;margin-top:var(--bench-3)}
+.hook-reference{padding:0;overflow:hidden}
+.hook-head{padding:var(--bench-6);border-bottom:1px solid var(--ln);background:linear-gradient(115deg,color-mix(in srgb,var(--ac) 9%,var(--sf)),var(--sf2))}
+.hook-kicker{color:var(--ac2)}
+.hook-head .sub{font-size:var(--bench-sm)}
+.hook-layout{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr)}
+.hook-part{min-width:0;padding:var(--bench-6)}
+.hook-part + .hook-part{border-left:1px solid var(--ln)}
+.hook-part h3{font-size:1.22rem;line-height:1.25}
+.hook-part p{color:var(--mu);font-size:var(--bench-sm);margin:var(--bench-2) 0 var(--bench-4)}
+.hook-rows{display:grid;list-style:none;padding:0;margin:0;border:1px solid var(--ln);border-radius:var(--rad);overflow:hidden}
+.hook-row{display:grid;grid-template-columns:4.9rem minmax(0,1fr);align-items:center;gap:var(--bench-2);padding:var(--bench-2) var(--bench-3);background:var(--sf2)}
+.hook-row + .hook-row{border-top:1px solid var(--ln)}
+.hook-row strong,.hook-row small{display:block}
+.hook-row small{font-size:var(--bench-xs);color:var(--mu)}
+.hook-row svg{display:block;width:100%;height:3rem;color:var(--ink)}
+.hook-row .shank-mark{stroke:var(--ac);stroke-width:2.2}
+.hook-row .shank-extension{stroke:var(--ac);stroke-width:6;opacity:.36}
+.hook-row .hook-gap{stroke:var(--mu);stroke-width:1.4;stroke-dasharray:2 2}
+.hook-legend{display:flex;gap:var(--bench-3);flex-wrap:wrap;margin-top:var(--bench-3);color:var(--mu);font-size:var(--bench-xs)}
+.hook-legend span::before{content:"";display:inline-block;width:.85rem;height:.22rem;margin-right:var(--bench-1);vertical-align:.16em;background:var(--ac)}
+.hook-legend span+span::before{opacity:.4}
+.hook-legend span.gap-key::before{opacity:1;height:0;background:none;border-top:1px dashed var(--mu)}
+.hook-scale{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--bench-1);margin:0;padding:0;list-style:none}
+.hook-scale li{min-width:0;display:grid;grid-template-rows:1fr auto;justify-items:center;align-items:center;background:var(--sf2);border:1px solid var(--ln);border-radius:.5rem;padding:var(--bench-1);min-height:3.8rem}
+.hook-scale svg{width:100%;max-width:5.5rem;height:2.2rem;color:var(--ac2)}
+.hook-scale svg :is(path,circle){vector-effect:non-scaling-stroke;stroke-width:1.4}
+.hook-scale strong{font-size:var(--bench-xs);font-variant-numeric:tabular-nums}
+.hook-foot{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--bench-4);padding:var(--bench-4) var(--bench-6);background:var(--sf2);border-top:1px solid var(--ln)}
+.hook-foot p{font-size:var(--bench-sm);margin:0;color:var(--mu)}
+.hook-foot strong{display:block;color:var(--ink);margin-bottom:var(--bench-1)}
+.hook-foot a{width:fit-content}
+@media(min-width:801px){.hook-row svg{height:3.4rem}}
+@media(max-width:800px){
+  .bench-layout{grid-template-columns:minmax(0,1.55fr) minmax(0,1fr)}
+  .topnav .inner{grid-template-columns:minmax(0,1fr) auto;column-gap:var(--bench-2)}
+  .nav-pages{grid-row:2;grid-column:1/-1}
+  .nav-tools{grid-row:3}
+  .nav-weather{grid-column:2;grid-row:1}
+}
+@media(max-width:650px){
+  .topnav{position:relative}
+  .bench-hero,.bench-layout,.hook-layout{grid-template-columns:minmax(0,1fr)}
+  .bench-hero{gap:var(--bench-4)}
+  .bench-water{width:100%;inset:auto -18% -7% auto}
+  .hook-part + .hook-part{border-left:0;border-top:1px solid var(--ln)}
+  .hook-head,.hook-part,.hook-foot{padding:var(--bench-4)}
+  .hook-foot{grid-template-columns:minmax(0,1fr);gap:var(--bench-3)}
+  .bench-readout{padding:var(--bench-3) var(--bench-4)}
+  #fliesPanel,.hook-reference,#benchPanel{scroll-margin-top:var(--bench-2)}
+}
+@media(max-width:430px){
+  .nav-pages{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--bench-1)}
+  .nav-pages .navlink{font-size:var(--bench-xs);padding:var(--bench-2) var(--bench-1)}
+  .nav-tools .navbtn,.nav-tools .themebar button{padding-inline:var(--bench-2)}
+  .nav-tools .colorbar,.nav-tools .nav-kbd{margin-left:0}
+  .filterbar{flex-wrap:wrap}
+  .filterbar input{flex:1 1 100%}
+}
+@media print{
+  body.print-inventory .wrap>div:not(#view-inventory){display:none!important}
+  body.print-inventory #view-inventory{display:block!important}
+  .bench-actions,.bench-utilities,.bench-suboptions,.guide-jump,.bench-water,.hook-legend,#cardBackup{display:none!important}
+  .inventory-intro button,.acc-header .acc-all{display:none!important}
+  .bench-hero,.bench-readout,.hook-head,.hook-row,.hook-scale li,.hook-foot{background:#fff!important;color:#000!important;box-shadow:none}
+  .bench-hero *,.hook-reference *{color:#000!important}
+  .hook-part{break-inside:avoid}
+}
 </style></head><body>
 
-<nav class="topnav">
+<nav class="topnav" aria-label="Main navigation">
   <div class="inner">
     <a class="brand" href="#/">Fly Tracker</a>
-    <a class="navlink" data-nav="home" href="#/">Home</a>
-    <a class="navlink" data-nav="all" href="#/all">All Flies</a>
-    <a class="navlink" data-nav="mats" href="#/materials">All Materials</a>
-    <a class="navlink" data-nav="now" href="#/now">Now</a>
-    <a class="navlink" data-nav="guide" href="#/guide">Guide</a>
-    <span class="spacer"></span>
+    <div class="nav-pages">
+      <a class="navlink" data-nav="home" href="#/">Home</a>
+      <a class="navlink" data-nav="all" href="#/all">All Flies</a>
+      <a class="navlink" data-nav="inventory" href="#/my-materials">My Materials</a>
+      <a class="navlink" data-nav="mats" href="#/materials">All Materials</a>
+      <a class="navlink" data-nav="now" href="#/now">Now</a>
+      <a class="navlink" data-nav="guide" href="#/guide">Guide</a>
+    </div>
     <div class="nav-weather" id="weather" role="button" tabindex="0" title="Click to change location"></div>
+    <div class="nav-tools">
     <button type="button" class="navlink navbtn" id="navCopyBtn">Copy Missing</button>
     <button type="button" class="navlink navbtn" id="navBackupBtn">Backup</button>
     <button class="nav-kbd" id="showShortcuts" title="Keyboard shortcuts" aria-label="Keyboard shortcuts">?</button>
@@ -610,93 +767,119 @@ dialog[open]{animation:pop .18s ease-out}
       <button data-c="red" title="Red Theme" aria-label="Red theme"></button>
       <button data-c="pink" title="Pink Theme" aria-label="Pink theme"></button>
     </div>
+    </div>
   </div>
 </nav>
 
-<div class="wrap">
+<main class="wrap">
+<div id="msg" role="status" aria-live="polite"></div>
 
 <!-- ===== HOME VIEW ===== -->
 <div id="view-home">
-<div class="hero">
-  <div class="titles">
-    <h1 id="head">Fly Tying Materials Tracker</h1>
-    <p class="sub">Check what you own. The list shows every fly you can tie, and tells you when a new material unlocks one. Tap any fly for a video search, a per-material shopping list, or its materials. Star a material you've bought to keep it through resets.</p>
-    <div class="hero-cta">
-      <button type="button" id="ctaTieable">✅ What can I tie now? ↓</button>
-      <button type="button" id="ctaPrintMissing" class="ghost">Print shopping list</button>
-      <button type="button" id="addFlyBtn" class="ghost">✍️ + Add a fly</button>
-      <button type="button" id="luckyBtn" class="ghost">🎲 Surprise Me (Random Fly)</button>
+  <section class="bench-hero" aria-labelledby="head">
+    <svg class="bench-water" viewBox="0 0 520 450" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4">
+      <path d="M-24 398C78 425 86 287 183 281s149 88 224 54S460 141 550 102"/>
+      <path d="M-22 380C77 403 74 266 177 258s155 86 220 56S455 124 550 85"/>
+      <path d="M-20 362C68 385 64 244 170 238s164 84 222 57S447 108 550 68"/>
+      <path d="M-18 344C62 362 56 225 162 216s171 82 226 58S438 88 550 51"/>
+      <path d="M-16 326C56 341 47 203 156 194s171 83 228 60S433 69 550 34"/>
+      <path d="M-14 308C48 319 42 181 149 172s174 84 230 61S428 52 550 17"/>
+      <path d="M-12 290C43 298 35 161 143 150s178 84 231 62S423 35 550 0"/>
+    </svg>
+    <div>
+      <p class="bench-kicker">Fly Tracker / Home</p>
+      <h1 id="head">At the tying bench</h1>
+      <p class="bench-intro">See what you can tie with the materials you own, or find a pattern you're one or two materials away from.</p>
+      <div class="bench-actions">
+        <button type="button" class="bench-action" id="ctaTieable">See ready-to-tie flies <span aria-hidden="true">↓</span></button>
+        <a href="#/my-materials" class="bench-action alt">Manage my materials <span aria-hidden="true">↗</span></a>
+      </div>
     </div>
-  </div>
-</div>
+    <div class="bench-readout">
+      <p class="bench-readout-title">Ready to tie</p>
+      <p class="bench-ready"><strong id="benchReady">0</strong><span>of <b id="benchTotal">0</b> patterns</span></p>
+      <div class="bench-meter" aria-hidden="true"><span id="benchProgress"></span></div>
+      <dl>
+        <div><dt>Materials owned</dt><dd id="benchOwned">0</dd></div>
+        <div><dt>Almost there</dt><dd id="benchNear">0</dd></div>
+      </dl>
+    </div>
+  </section>
 
-<div class="stickytool" id="stickytool">
-  <div class="stat" id="statOwned">Materials: <b>0</b></div>
-  <div class="stat" id="statMissing">Missing: <b>0</b></div>
-  <div class="stat" id="statTieable">Tieable: <b>0</b></div>
-  <label class="subtoggle" title="Treat substitute materials as owned"><input type="checkbox" id="subsToggle"> Count substitutes</label>
-  <div class="spacer"></div>
-  <input class="quicksearch" id="globalflysearch" type="search" placeholder="Search flies… /" aria-label="Search flies">
-</div>
-
-<div id="msg" role="status" aria-live="polite"></div>
-
-<div class="grid">
-  <div class="col-flies">
-    <div class="panel" id="fliesPanel"><h2>Flies You Can Tie</h2>
+  <div class="bench-layout">
+    <section class="panel" id="fliesPanel" aria-labelledby="readyHeading">
+      <div class="bench-heading">
+        <div><h2 id="readyHeading" tabindex="-1">Flies you can tie</h2><p class="sub">Pick a pattern to open its recipe and materials.</p></div>
+        <button type="button" id="addFlyBtn" class="bench-secondary">+ Add a fly</button>
+      </div>
       <div class="recent-row" id="recentRow" style="display:none"></div>
+      <div class="filterbar bench-filter">
+        <input id="flyfilter" type="search" placeholder="Search ready-to-tie flies…" aria-label="Search ready-to-tie flies">
+        <select id="catfilter" aria-label="Filter category"><option value="">All types</option></select>
+        <span class="kbd" aria-hidden="true">/</span>
+      </div>
+      <div class="bench-suboptions">
+        <label class="subtoggle" title="Treat substitute materials as owned"><input type="checkbox" id="subsToggle"> Count substitutes</label>
+        <a href="#/all">Browse all flies <span aria-hidden="true">→</span></a>
+      </div>
       <div id="flies"></div>
+    </section>
+    <aside class="bench-side" aria-label="Bench shortcuts">
+      <section class="panel" id="closePanel" aria-labelledby="nearHeading">
+        <h2 id="nearHeading">Almost there</h2>
+        <p class="sub">Patterns that need just one or two more materials.</p>
+        <ul class="near-preview" id="closePreview" aria-label="Closest patterns"></ul>
+        <div class="acc" id="closeAcc">
+          <button class="acc-head" type="button" id="closeHead" aria-expanded="false" aria-controls="closeBody">
+            <span class="chev" aria-hidden="true">▶</span>
+            <span class="lbl" id="closeLabel">Show closest flies</span>
+            <span class="cnt" id="closeCount"></span>
+          </button>
+          <div class="acc-body" id="closeBody" hidden><div id="close"></div></div>
+        </div>
+      </section>
+      <div class="bench-utilities">
+        <button type="button" id="luckyBtn" class="bench-secondary">Surprise me with a fly</button>
+        <button type="button" id="ctaPrintMissing" class="bench-secondary">Print shopping list</button>
+      </div>
+      <div class="mini" id="cardBackup" tabindex="-1">
+        <h3>Backup</h3>
+        <p class="muted" id="lastBackup">Loading…</p>
+        <div class="act-row">
+          <button type="button" id="exportBtn">Export</button>
+          <button type="button" id="importBtn">Import</button>
+          <input id="importFile" type="file" accept=".json,application/json" style="display:none">
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<!-- ===== PERSONAL INVENTORY VIEW ===== -->
+<div id="view-inventory" style="display:none">
+  <header class="bench-page-title">
+    <h1>My Materials</h1>
+    <p class="sub">Check off what you own to update the flies you can tie. Star a material to keep it when you reset to your starred list.</p>
+  </header>
+  <section class="panel" id="matsPanel" aria-labelledby="inventoryHeading">
+    <div class="inventory-intro">
+      <h2 id="inventoryHeading">Your inventory</h2>
+      <button id="addcustom" type="button" class="bench-secondary">+ Add custom material</button>
     </div>
-  </div>
-</div>
-
-<div class="panel" id="closePanel">
-  <div class="acc" id="closeAcc">
-    <button class="acc-head" type="button" id="closeHead" aria-expanded="false" aria-controls="closeBody">
-      <span class="chev">▶</span>
-      <span class="lbl">Almost There</span>
-      <span class="cnt" id="closeCount"></span>
-    </button>
-    <div class="acc-body" id="closeBody" hidden>
-      <p class="sub" style="margin:8px 0 8px">The 50 closest: missing one or two materials, grouped by type.</p>
-      <div id="close"></div>
+    <div class="health" id="health"></div>
+    <div class="quickadd">
+      <input id="quickadd" type="search" placeholder="Search for a material to add or remove…" aria-label="Quick-add material">
+      <div class="results" id="quickaddResults"></div>
     </div>
-  </div>
-</div>
-
-<div class="panel" id="matsPanel">
-  <h2>My Materials</h2>
-  <div class="health" id="health"></div>
-  <div class="quickadd">
-    <input id="quickadd" type="search" placeholder="Quick-add a material (type to search)…" aria-label="Quick-add material">
-    <div class="results" id="quickaddResults"></div>
-  </div>
-  <div id="mats"></div>
-  <div class="tools">
-    <button id="addcustom" class="primary">+ Add custom material</button>
-    <button id="reset">Reset to starred list</button>
-    <button id="clear">Clear all</button>
-    <button id="printbtn">Print</button>
-    <button id="printmissing">Print missing</button>
-  </div>
-</div>
-
-<div class="mini" id="cardBackup">
-  <h3>Backup</h3>
-  <p class="muted" id="lastBackup">Loading…</p>
-  <div class="act-row">
-    <button type="button" id="exportBtn">Export</button>
-    <button type="button" id="importBtn">Import</button>
-    <input id="importFile" type="file" accept=".json,application/json" style="display:none">
-  </div>
-</div>
-
-<div class="filterbar">
-  <input id="flyfilter" type="search" placeholder="Filter flies… (press /)" aria-label="Filter flies">
-  <select id="catfilter" aria-label="Filter category"><option value="">All types</option></select>
-  <span class="kbd">/</span>
-</div>
-
+    <div id="mats"></div>
+    <div class="tools">
+      <button id="reset" type="button">Reset to starred list</button>
+      <button id="clear" type="button">Clear all</button>
+      <button id="printbtn" type="button">Print inventory</button>
+      <button id="printmissing" type="button">Print missing</button>
+      <a class="bench-secondary" href="#/materials">Browse all materials <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
 </div>
 
 <!-- ===== ALL FLIES VIEW ===== -->
@@ -757,9 +940,38 @@ dialog[open]{animation:pop .18s ease-out}
     <div class="titles">
       <h1>Fishing & Tying Guide</h1>
       <p class="sub">A comprehensive reference for leaders, knots, tactics, and fly tying fundamentals.</p>
+      <div class="guide-jump">
+        <button type="button" class="bench-secondary" data-guide-jump="hookTitle">Hook reference</button>
+        <button type="button" class="bench-secondary" data-guide-jump="benchPanel">Printable bench sheets</button>
+      </div>
     </div>
   </div>
-  <div class="panel" id="benchPanel"></div>
+  <section class="panel hook-reference" aria-labelledby="hookTitle">
+    <header class="hook-head">
+      <p class="hook-kicker">Tying bench reference</p>
+      <h2 id="hookTitle" tabindex="-1">Hook Sizes &amp; Shank Lengths</h2>
+      <p class="sub">Read the hook number for size, and the XL or XS label for shank length.</p>
+    </header>
+    <div class="hook-layout">
+      <section class="hook-part" aria-labelledby="shankHeading">
+        <h3 id="shankHeading">Same size, longer body</h3>
+        <p>These four #10 hooks show how extra shank length gives you more room to tie a body without widening the gap.</p>
+        <ul class="hook-rows" id="hookRows"></ul>
+        <div class="hook-legend"><span>Shank length</span><span>Extra length</span><span class="gap-key">Gap</span></div>
+      </section>
+      <section class="hook-part" aria-labelledby="sizeHeading">
+        <h3 id="sizeHeading">Larger number, smaller hook</h3>
+        <p>For regular numbered sizes, #2 is larger than #24. Aught sizes go the other way: 2/0 is larger than 1/0.</p>
+        <ol class="hook-scale" id="hookScale" aria-label="Numbered hook sizes, largest to smallest"></ol>
+      </section>
+    </div>
+    <footer class="hook-foot">
+      <p><strong>Shank</strong> The straight section you tie on. XL means longer; XS means shorter. The X number is relative, not a fixed length.</p>
+      <p><strong>Gap (gape)</strong> The distance from the hook point to the shank. Wire thickness is separate: fine means thinner, heavy or stout means thicker.</p>
+      <p><strong>Compare the actual hooks</strong> Drawings aren’t to scale. Dimensions vary by brand and model. <a href="https://flyfishsd.com/pages/fly-tying-hook-reference-guide" target="_blank" rel="noopener noreferrer">Dakota Angler’s hook guide</a></p>
+    </footer>
+  </section>
+  <div class="panel" id="benchPanel" tabindex="-1"></div>
   <div class="panel deck">
     <h2>Leader Rig Card Deck</h2>
     <p class="sub" style="margin:0 0 10px">Pick a rig for the water you're fishing. Print-friendly.</p>
@@ -880,10 +1092,9 @@ dialog[open]{animation:pop .18s ease-out}
       <li><a href="https://www.youtube.com/results?search_query=proper+catch+and+release+trout" target="_blank" rel="noopener noreferrer" class="link">(Watch Catch & Release Videos)</a></li>
     </ul>
   </div>
-  <div id="guideExtra"></div>
 </div>
 
-</div>
+</main>
 
 <div class="scrollnav" id="scrollnav"><button type="button" id="goTop" aria-label="Scroll to top" title="Top">▲</button><button type="button" id="goBottom" aria-label="Scroll to bottom" title="Bottom">▼</button></div>
 
@@ -891,7 +1102,7 @@ dialog[open]{animation:pop .18s ease-out}
   <div class="box" role="dialog" aria-labelledby="scHead">
     <h2 id="scHead">Keyboard shortcuts</h2>
     <div class="kv">
-      <kbd>/</kbd><span>Focus the fly search</span>
+      <kbd>/</kbd><span>Focus the current fly or material search</span>
       <kbd>Esc</kbd><span>Close any dialog or overlay</span>
       <kbd>?</kbd><span>Show or hide this list</span>
       <kbd>Ctrl/⌘ + Z</kbd><span>Undo last material action</span>
@@ -900,6 +1111,7 @@ dialog[open]{animation:pop .18s ease-out}
       <kbd>3</kbd><span>All Materials</span>
       <kbd>4</kbd><span>Now</span>
       <kbd>5</kbd><span>Guide</span>
+      <kbd>6</kbd><span>My Materials</span>
     </div>
     <div class="act-row" style="margin-top:14px;display:flex;justify-content:flex-end">
       <button class="chip" id="scClose">Close</button>
@@ -1435,6 +1647,7 @@ function itemCard(name,meta,q,owned,estimate){const card=E('div','item'+(owned?'
 
 function msg(cls,text,names,undo){
   const m=$('msg');if(!m)return;m.className=cls;m.textContent='';const p=E('div');p.textContent=text;m.append(p);
+  const dismiss=E('button','msg-dismiss','×');dismiss.type='button';dismiss.setAttribute('aria-label','Dismiss message');dismiss.onclick=()=>{m.textContent='';m.className=''};m.append(dismiss);
   if(undo){
     const u=E('button','undo','Undo');
     u.append(document.createTextNode(' '));
@@ -1664,11 +1877,11 @@ function mkAcc(opts){
   }
   if(opts.bulkBtn){
     const bb=E('button','acc-all',opts.bulkBtn.label);bb.type='button';
-    bb.onclick=(e)=>{e.stopPropagation();opts.bulkBtn.onClick()};
-    head.append(bb);
-  }
-  head.addEventListener('click',(e)=>{if(e.target.closest('.acc-all'))return;opts.onToggle(!opts.open)});
-  wrap.append(head);
+    bb.setAttribute('aria-label',opts.bulkBtn.label+' in '+opts.label);
+    bb.onclick=opts.bulkBtn.onClick;
+    const header=E('div','acc-header');header.append(head,bb);wrap.append(header);
+  }else wrap.append(head);
+  head.addEventListener('click',()=>opts.onToggle(!opts.open));
   const body = E('div','acc-body');
   if(opts.ariaControls) body.id=opts.ariaControls;
   if(!opts.open) body.setAttribute('hidden','');
@@ -1699,17 +1912,16 @@ function showAddCustom(){
   if(!dlg.open)dlg.showModal();
 }
 
+const flySearchOpen=new Map();
 function render(){
   const ok=can(inv),okS=new Set(ok);
-  const newCount=seen?ok.filter(n=>!seen.has(n)).length:0;
-  $('head').textContent='You Can Tie '+ok.length+' Of '+D.F.length+' Flies'+(newCount?'  ·  '+newCount+' new':'');
+  $('benchReady').textContent=ok.length;
+  $('benchTotal').textContent=D.F.length;
+  $('benchProgress').style.width=(D.F.length?ok.length/D.F.length*100:0)+'%';
 
   const allMatIds=[];D.M.forEach(([g,list])=>list.forEach(([id])=>allMatIds.push(id)));
   const ownedN=allMatIds.filter(id=>inv.has(id)||threadOwned.has(id)).length;
-  const missN=allMatIds.length-ownedN;
-  if($('statOwned'))$('statOwned').innerHTML='Materials: <b>'+ownedN+'</b>';
-  if($('statMissing'))$('statMissing').innerHTML='Missing: <b>'+missN+'</b>';
-  if($('statTieable'))$('statTieable').innerHTML='Tieable: <b>'+ok.length+'</b>';
+  $('benchOwned').textContent=ownedN+custom.filter(x=>inv.has(x.id)||threadOwned.has(x.id)).length;
 
   const health=$('health');
   if(health){
@@ -1749,14 +1961,14 @@ function render(){
   }
   perCat.forEach(cat=>{
     const key='cat:'+cat.key;
-    const isOpen = (cat.key==='__custom__') ? !!ui.matsOpen : (ui.catOpen && Object.prototype.hasOwnProperty.call(ui.catOpen,key) ? !!ui.catOpen[key] : ui.matsOpen);
+    const isOpen = ui.catOpen && Object.hasOwn(ui.catOpen,key) ? !!ui.catOpen[key] : cat.isCustom || ui.matsOpen;
     const acc = mkAcc({
       id:key, label: cat.label, count: cat.ownedN+'/'+cat.total, open: isOpen,
       bulkBtn: cat.isCustom? null : {
         label: cat.ownedN === cat.total ? 'Clear all' : 'Mark all',
         onClick: ()=>{
           const allOwned = cat.children.every(([id])=>inv.has(id)||threadOwned.has(id));
-          cat.children.forEach(([id])=>{ if(allOwned){inv.delete(id);threadOwned.delete(id)} else {inv.add(id);threadOwned.add(id)} });
+          cat.children.forEach(([id])=>{if(allOwned){inv.delete(id);threadOwned.delete(id)}else inv.add(id)});
           save(); saveThread();
           render();
           msg(allOwned?'':'new',(allOwned?'Cleared':'Marked')+' '+cat.label+(allOwned?'.':' owned.'));
@@ -1772,7 +1984,7 @@ function render(){
     mats.append(acc);
   });
 
-  const fq=($('flyfilter').value||'').toLowerCase(),fc=$('catfilter').value;
+  const fq=($('flyfilter').value||'').trim().toLowerCase(),fc=$('catfilter').value;
   const fl=$('flies'); fl.textContent='';
   const cats=[...new Set(D.F.map(f=>f[1]))];
   let firstOpened=false;
@@ -1780,15 +1992,19 @@ function render(){
     if(fc&&c!==fc)return;
     const all=D.F.filter(f=>f[1]===c&&(!fq||f[0].toLowerCase().includes(fq)));
     const have=all.filter(f=>okS.has(f[0]));
-    if(fq&&!all.length)return;
+    if(!have.length)return;
     const key='fly:'+c;
     let isOpen;
-    if(ui.catOpen && Object.prototype.hasOwnProperty.call(ui.catOpen,key)){isOpen = !!ui.catOpen[key]}
+    if(fq||fc){isOpen=flySearchOpen.get(c)??true}
+    else if(ui.catOpen && Object.prototype.hasOwnProperty.call(ui.catOpen,key)){isOpen = !!ui.catOpen[key]}
     else {isOpen = !firstOpened}
     if(isOpen) firstOpened=true;
     const acc = mkAcc({
       id:key, label: c, count: have.length+'/'+all.length, open: isOpen,
-      onToggle: (next)=>setUI({catOpen: Object.assign({}, ui.catOpen, {[key]: next})}),
+      onToggle: (next)=>{
+        if(fq||fc){flySearchOpen.set(c,next);render()}
+        else setUI({catOpen: Object.assign({}, ui.catOpen, {[key]: next})});
+      },
       ariaControls: 'flycat-'+c.replace(/\W+/g,'-'),
       bodyBuilder: (body)=>{
         const r=E('div','row');
@@ -1803,12 +2019,24 @@ function render(){
     });
     fl.append(acc);
   });
+  if(!fl.childElementCount){
+    const p=E('p','sub',fq||fc?'No ready-to-tie flies match these filters.':'No flies are ready to tie yet. Add what you have in My Materials to get started.');
+    fl.append(p);
+  }
 
-
-  const closeFlies=D.F.map(f=>[f,miss(f,inv)]).filter(x=>x[1].length>=1&&x[1].length<=2).sort((a,b)=>a[1].length-b[1].length||a[0][0].localeCompare(b[0][0])).slice(0,50);
+  const closest=D.F.map(f=>[f,miss(f,inv)]).filter(x=>x[1].length>=1&&x[1].length<=2).sort((a,b)=>a[1].length-b[1].length||a[0][0].localeCompare(b[0][0]));
+  const closeFlies=closest.slice(0,50);
+  $('benchNear').textContent=closest.length;
   const cHead=$('closeHead'),cBody=$('closeBody'),cCnt=$('closeCount');
   let closeOpen = !!ui.closeOpen;
   if(ui.closeAuto && closeFlies.length>0 && closeFlies.length<=10){ closeOpen = true; }
+  $('closeAcc').hidden=!closeFlies.length;
+  $('closeLabel').textContent=closeOpen?'Hide closest flies':closest.length>50?'Show 50 closest flies':'Show closest flies';
+  const preview=$('closePreview');preview.textContent='';preview.hidden=closeOpen&&closeFlies.length>0;
+  closeFlies.slice(0,3).forEach(([f,m])=>{
+    const li=E('li');li.append(L(f[0],'lnk'),E('small','',m.length+' missing'));preview.append(li);
+  });
+  if(!closeFlies.length)preview.append(E('li','sub','No patterns are one or two materials away.'));
   if(cHead){cHead.setAttribute('aria-expanded',closeOpen?'true':'false');cHead.parentElement.classList.toggle('open',closeOpen)}
   if(cBody){ if(closeOpen) cBody.removeAttribute('hidden'); else cBody.setAttribute('hidden',''); }
   if(cCnt) cCnt.textContent = closeFlies.length ? closeFlies.length+' flies' : '';
@@ -1859,12 +2087,14 @@ function matRow(c,l,isCustom){
 }
 
 function toggle(c,on){
-  const before=new Set(can(inv));on?inv.add(c):inv.delete(c);save();
+  const before=new Set(can(inv));
+  if(on)inv.add(c);else {inv.delete(c);if(threadOwned.delete(c))saveThread()}
+  save();
   const after=can(inv),aS=new Set(after);const gain=after.filter(n=>!before.has(n)),lost=[...before].filter(n=>!aS.has(n));
   fresh=new Set(gain);render();
-  if(on&&gain.length)msg('new','Adding '+lab(c)+' unlocks '+gain.length+' new fly'+(gain.length>1?'ies':'')+':',gain);
+  if(on&&gain.length)msg('new','Adding '+lab(c)+' unlocks '+gain.length+(gain.length===1?' new fly:':' new flies:'),gain);
   else if(on)msg('','Added '+lab(c)+'. No new flies yet.');
-  else if(lost.length)msg('','Without '+lab(c)+' you lose '+lost.length+' fly'+(lost.length>1?'ies':'')+':',lost);
+  else if(lost.length)msg('','Without '+lab(c)+' you lose '+lost.length+(lost.length===1?' fly:':' flies:'),lost);
   else msg('','Removed '+lab(c)+'. No flies affected.');
 }
 
@@ -1899,34 +2129,41 @@ function renderQuickAdd(){
 }
 $('quickadd').addEventListener('input',renderQuickAdd);
 
-$('flyfilter').addEventListener('input',render);
-$('catfilter').addEventListener('change',render);
+const renderFlySearch=()=>{flySearchOpen.clear();render()};
+$('flyfilter').addEventListener('input',renderFlySearch);
+$('catfilter').addEventListener('change',renderFlySearch);
 function refreshCatFilter(){const cf=$('catfilter'),cur=cf.value;cf.textContent='';cf.append(new Option('All types',''));[...new Set(D.F.map(f=>f[1]))].forEach(c=>cf.append(new Option(c,c)));cf.value=cur}
 refreshCatFilter();
 
-$('globalflysearch').addEventListener('input',(e)=>{
-  $('flyfilter').value=e.target.value;
-  render();
-});
-$('flyfilter').addEventListener('input',()=>{ if($('globalflysearch'))$('globalflysearch').value=$('flyfilter').value; });
-
 (()=>{
   const t=$('ctaTieable'), pm=$('ctaPrintMissing');
-  if(t) t.onclick=()=>{ const el=$('fliesPanel'); if(el) el.scrollIntoView({behavior:'smooth', block:'start'}); };
+  if(t) t.onclick=()=>{ $('readyHeading').focus({preventScroll:true});$('fliesPanel').scrollIntoView({block:'start'}); };
   if(pm) pm.onclick=()=>printMissing();
 })();
 
-function printMissing(){
-  document.body.classList.add('print-missing');
-  window.print();
-  setTimeout(()=>document.body.classList.remove('print-missing'), 500);
+function printInventory(missing=false){
+  document.body.classList.add('print-inventory');
+  document.body.classList.toggle('print-missing',missing);
+  try{window.print()} finally{document.body.classList.remove('print-inventory','print-missing')}
 }
+function printMissing(){printInventory(true)}
 $('printmissing').onclick=printMissing;
 
 $('addcustom').onclick=showAddCustom;
-$('reset').onclick=()=>{inv=new Set(base);save();fresh=new Set();render();msg('','Reset to your starred list.')};
-$('clear').onclick=()=>{const prev=[...inv];pendingUndo=()=>{inv=new Set(prev);save();render()};inv=new Set();save();fresh=new Set();render();msg('','Cleared. Check what you own to see what you can tie.',null,pendingUndo)};
-$('printbtn').onclick=()=>window.print();
+// Some older builds also stored material IDs in the thread/hook ownership set.
+function replaceMaterialInventory(next){
+  inv=new Set(next);
+  threadOwned=new Set([...threadOwned].filter(id=>id.startsWith('thread_')||id.startsWith('hook_')));
+  save();saveThread();fresh=new Set();render();
+}
+$('reset').onclick=()=>{replaceMaterialInventory(base);msg('','Reset to your starred list.')};
+$('clear').onclick=()=>{
+  const prev=[...inv],prevThread=[...threadOwned];
+  pendingUndo=()=>{inv=new Set(prev);threadOwned=new Set(prevThread);save();saveThread();render();pendingUndo=null};
+  replaceMaterialInventory([]);
+  msg('','Cleared. Check what you own to see what you can tie.',null,pendingUndo);
+};
+$('printbtn').onclick=()=>printInventory();
 
 (()=>{
   const h=$('closeHead');
@@ -1940,23 +2177,30 @@ $('printbtn').onclick=()=>window.print();
 
 
 function setView(v){
-  const home=$('view-home'),all=$('view-all'),mats=$('view-mats'),guide=$('view-guide'),now=$('view-now');
-  if(!home||!all||!mats||!guide||!now)return;
-  const _m=$('msg');if(_m){_m.textContent='';_m.className=''}
-  home.style.display='none'; all.style.display='none'; mats.style.display='none'; guide.style.display='none'; now.style.display='none';
-  if(v==='all'){ all.style.display=''; renderAllFlies() }
-  else if(v==='mats'){ mats.style.display=''; renderAllMats() }
-  else if(v==='guide'){ guide.style.display=''; renderRigDeck(); renderKnotDeck(); renderBench(); renderGuideExtra(); }
-  else if(v==='now'){ now.style.display=''; renderNow() }
-  else { home.style.display=''; render() }
-  document.querySelectorAll('[data-nav]').forEach(a=>a.classList.toggle('on',a.dataset.nav===v));
+  const views={home:'view-home',all:'view-all',mats:'view-mats',inventory:'view-inventory',guide:'view-guide',now:'view-now'};
+  Object.entries(views).forEach(([key,id])=>{$(id).style.display=key===v?'':'none'});
+  if(v==='all')renderAllFlies();
+  else if(v==='mats')renderAllMats();
+  else if(v==='guide'){renderRigDeck();renderKnotDeck();renderBench();renderHookReference()}
+  else if(v==='now')renderNow();
+  else render();
+  document.querySelectorAll('[data-nav]').forEach(a=>{
+    const active=a.dataset.nav===v;a.classList.toggle('on',active);
+    if(active)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');
+  });
 }
-function route(){
+function route(event){
   const h=location.hash.replace(/^#\/?/,'');
-  setView(h==='all'?'all':(h==='materials'?'mats':(h==='guide'?'guide':(h==='now'?'now':'home'))));
+  const routes=new Map([['all','all'],['materials','mats'],['my-materials','inventory'],['guide','guide'],['now','now']]);
+  setView(routes.get(h)||'home');
+  if(event){const m=$('msg');m.textContent='';m.className='';window.scrollTo({top:0,behavior:'instant'})}
 }
 window.addEventListener('hashchange',route);
-document.querySelectorAll('[data-nav]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();location.hash=a.dataset.nav==='all'?'#/all':(a.dataset.nav==='mats'?'#/materials':(a.dataset.nav==='guide'?'#/guide':(a.dataset.nav==='now'?'#/now':'#/')))}));
+
+document.querySelectorAll('[data-guide-jump]').forEach(b=>b.onclick=()=>{
+  const target=$(b.dataset.guideJump);target.focus({preventScroll:true});
+  (target.closest('.hook-reference')||target).scrollIntoView({block:'start'});
+});
 
 $('af-filter').addEventListener('input',renderAllFlies);
 $('af-status').addEventListener('change',renderAllFlies);
@@ -1987,9 +2231,13 @@ document.addEventListener('keydown',(e)=>{
   }
   if(inField) return;
   if(e.key==='?'){e.preventDefault();shortcutsEl.classList.contains('on')?hideShortcuts():showShortcuts();return}
-  if(e.key==='/'){e.preventDefault();const f=$('flyfilter');if(f&&$('view-home').style.display!=='none'){f.focus();f.select&&f.select()}return}
-  if(/^[1-5]$/.test(e.key)){
-    const map={'1':'#/','2':'#/all','3':'#/materials','4':'#/now','5':'#/guide'};
+  if(e.key==='/'){
+    const active=document.querySelector('[data-nav][aria-current="page"]')?.dataset.nav;
+    const id={home:'flyfilter',inventory:'quickadd',all:'af-filter',mats:'am-filter'}[active];
+    if(id){e.preventDefault();$(id).focus();$(id).select()}return;
+  }
+  if(/^[1-6]$/.test(e.key)){
+    const map={'1':'#/','2':'#/all','3':'#/materials','4':'#/now','5':'#/guide','6':'#/my-materials'};
     location.hash=map[e.key];
   }
 });
@@ -3582,7 +3830,7 @@ function renderAllMats(){
     const bulk=E('div','cat-bulk');
     if(c!=='Custom'){
       const bAll=E('button','','Mark all owned');bAll.type='button';
-      bAll.onclick=()=>{listAll.forEach(m=>{inv.add(m.id);threadOwned.add(m.id)});save();saveThread();renderAllMats();msg('new','Marked '+c+' owned.')};
+      bAll.onclick=()=>{listAll.forEach(m=>inv.add(m.id));save();renderAllMats();msg('new','Marked '+c+' owned.')};
       const bNone=E('button','','Clear all');bNone.type='button';
       bNone.onclick=()=>{listAll.forEach(m=>{inv.delete(m.id);threadOwned.delete(m.id)});save();saveThread();renderAllMats();msg('','Cleared '+c+'.')};
       bulk.append(bAll,bNone);
@@ -3601,7 +3849,7 @@ function renderAllMats(){
       mk('Image',()=>window.open('https://duckduckgo.com/?iax=images&ia=images&q='+encodeURIComponent('fly tying '+term(m.id)),'_blank','noopener'));
       mk('Buy',()=>matMenu(m.id,m.label));
       mk(owned?'Unmark':'Mark owned',()=>{
-        if(owned){inv.delete(m.id);threadOwned.delete(m.id)}else{inv.add(m.id);threadOwned.add(m.id)}
+        if(owned){inv.delete(m.id);threadOwned.delete(m.id)}else inv.add(m.id);
         save();saveThread();renderAllMats();
       });
       card.append(acts);g.append(card);
@@ -3645,23 +3893,36 @@ function updateLastBackup(){
   const nb=$('navBackupBtn');if(nb)nb.classList.toggle('needs',cls==='warn');
 }
 
-/* ---------- Guide extras: add entries here (title + HTML) and they show at the bottom of the Guide tab ---------- */
-const GUIDE_EXTRA=[
-  {title:'Hook Sizes & Shank Lengths (1XL / 2XL / 3XL)',html:`<p>Hook size numbers run backwards: <b>the bigger the number, the smaller the hook</b>. The “XL” rating tells you shank length, not hook size.</p>
-<div style="overflow-x:auto;margin:10px 0"><svg viewBox="0 0 380 325" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Size 10 hooks: standard, 1XL, 2XL and 3XL shank lengths" style="width:100%;max-width:380px;height:auto;color:var(--ink)" font-family="system-ui,Segoe UI,sans-serif"><text x="0" y="16" font-size="13" font-weight="700" style="fill:var(--ac)" >Size #10 hooks: same gape, longer shank</text><line x1="165.5" y1="28" x2="165.5" y2="319" stroke="currentColor" stroke-opacity=".28" stroke-dasharray="3 4"/><text x="0" y="46.0" font-size="14" font-weight="700">Standard</text><circle cx="97.6" cy="42.0" r="5.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M103.2,42.0 L165.5,42.0 A18.4,18.4 0 0 1 165.5,78.8 L132.4,78.8 L128.0,64.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><text x="195.9" y="46.0" font-size="12" style="fill:var(--mu)">≈ 10.5 mm shank</text><text x="0" y="116.8" font-size="14" font-weight="700">1XL</text><circle cx="97.6" cy="112.8" r="5.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M103.2,112.8 L183.0,112.8 A18.4,18.4 0 0 1 183.0,149.5 L142.1,149.5 L137.6,135.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><text x="213.4" y="116.8" font-size="12" style="fill:var(--mu)">≈ 13 mm shank</text><text x="0" y="187.5" font-size="14" font-weight="700">2XL</text><circle cx="97.6" cy="183.5" r="5.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M103.2,183.5 L204.0,183.5 A18.4,18.4 0 0 1 204.0,220.2 L156.2,220.2 L151.8,206.3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><text x="234.4" y="187.5" font-size="12" style="fill:var(--mu)">≈ 16 mm shank</text><text x="0" y="258.2" font-size="14" font-weight="700">3XL</text><circle cx="97.6" cy="254.2" r="5.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M103.2,254.2 L232.0,254.2 A18.4,18.4 0 0 1 232.0,291.0 L184.2,291.0 L179.8,277.0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><text x="262.4" y="258.2" font-size="12" style="fill:var(--mu)">≈ 20 mm shank</text></svg></div>
-<ul>
-<li><b>Standard</b> – regular shank for that size.</li>
-<li><b>1XL / 2XL / 3XL</b> – shank as long as a standard hook <b>1, 2 or 3 sizes larger</b>, but the gape stays the same. A #10 2XL has the shank of a #6 with the gape of a #10.</li>
-<li>Use longer shanks for nymphs, streamers and stoneflies, where you want a longer body without a bigger hook.</li>
-<li>Don’t confuse these with wire ratings: <b>1X fine</b> is lighter wire and <b>1X stout</b> is heavier. “1XS” means a shorter shank.</li>
-</ul>
-<div style="overflow-x:auto;margin:14px 0"><svg viewBox="0 0 341 628" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Standard hook sizes 4 through 24 drawn to one scale" style="width:100%;max-width:341px;height:auto;color:var(--ink)" font-family="system-ui,Segoe UI,sans-serif"><text x="0" y="16" font-size="13" font-weight="700" style="fill:var(--ac)">Standard hook sizes, drawn to one scale</text><text x="0" y="42.0" font-size="13" font-weight="700">#4</text><circle cx="66.5" cy="38.0" r="10.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M77.0,38.0 L196.0,38.0 A35.0,35.0 0 0 1 196.0,108.0 L133.0,108.0 L124.6,81.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><text x="241.0" y="42.0" font-size="12" style="fill:var(--mu)">20 mm</text><text x="0" y="134.0" font-size="13" font-weight="700">#6</text><circle cx="64.4" cy="130.0" r="8.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M72.8,130.0 L168.0,130.0 A28.0,28.0 0 0 1 168.0,186.0 L117.6,186.0 L110.9,164.7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><text x="206.0" y="134.0" font-size="12" style="fill:var(--mu)">16 mm</text><text x="0" y="212.0" font-size="13" font-weight="700">#8</text><circle cx="62.8" cy="208.0" r="6.8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M69.7,208.0 L147.0,208.0 A22.8,22.8 0 0 1 147.0,253.5 L106.0,253.5 L100.6,236.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><text x="179.8" y="212.0" font-size="12" style="fill:var(--mu)">13 mm</text><text x="0" y="279.5" font-size="13" font-weight="700">#10</text><circle cx="61.6" cy="275.5" r="5.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M67.2,275.5 L129.5,275.5 A18.4,18.4 0 0 1 129.5,312.2 L96.4,312.2 L92.0,298.3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><text x="157.9" y="279.5" font-size="12" style="fill:var(--mu)">10.5 mm</text><text x="0" y="338.2" font-size="13" font-weight="700">#12</text><circle cx="61.6" cy="334.2" r="5.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M67.2,334.2 L119.0,334.2 A15.8,15.8 0 0 1 119.0,365.8 L90.7,365.8 L86.9,353.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><text x="144.8" y="338.2" font-size="12" style="fill:var(--mu)">9 mm</text><text x="0" y="391.8" font-size="13" font-weight="700">#14</text><circle cx="61.6" cy="387.8" r="5.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M67.2,387.8 L108.5,387.8 A13.1,13.1 0 0 1 108.5,414.0 L84.9,414.0 L81.7,404.0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><text x="131.6" y="391.8" font-size="12" style="fill:var(--mu)">7.5 mm</text><text x="0" y="440.0" font-size="13" font-weight="700">#16</text><circle cx="61.6" cy="436.0" r="5.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M67.2,436.0 L101.5,436.0 A11.4,11.4 0 0 1 101.5,458.8 L81.0,458.8 L78.3,450.1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><text x="122.9" y="440.0" font-size="12" style="fill:var(--mu)">6.5 mm</text><text x="0" y="484.8" font-size="13" font-weight="700">#18</text><circle cx="61.6" cy="480.8" r="5.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M67.2,480.8 L94.5,480.8 A9.6,9.6 0 0 1 94.5,500.0 L77.2,500.0 L74.9,492.7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><text x="114.1" y="484.8" font-size="12" style="fill:var(--mu)">5.5 mm</text><text x="0" y="526.0" font-size="13" font-weight="700">#20</text><circle cx="61.6" cy="522.0" r="5.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M67.2,522.0 L87.5,522.0 A7.9,7.9 0 0 1 87.5,537.8 L73.3,537.8 L71.4,531.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><text x="105.4" y="526.0" font-size="12" style="fill:var(--mu)">4.5 mm</text><text x="0" y="563.8" font-size="13" font-weight="700">#22</text><circle cx="61.6" cy="559.8" r="5.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M67.2,559.8 L80.5,559.8 A6.1,6.1 0 0 1 80.5,572.0 L69.5,572.0 L68.0,567.3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><text x="96.6" y="563.8" font-size="12" style="fill:var(--mu)">3.5 mm</text><text x="0" y="598.0" font-size="13" font-weight="700">#24</text><circle cx="61.6" cy="594.0" r="5.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M67.2,594.0 L77.0,594.0 A5.2,5.2 0 0 1 77.0,604.5 L67.5,604.5 L66.3,600.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><text x="92.2" y="598.0" font-size="12" style="fill:var(--mu)">3 mm</text></svg></div>
-<p style="color:var(--mu);font-size:.85rem">Lengths are typical for standard dry-fly hooks. Brands vary by up to about 3 mm, so treat this as a guide. Drawings share one scale but are not printed true-size.</p>`},
-/*@@GUIDE_EXTRA_END@@*/
-];
-function renderGuideExtra(){
-  const box=$('guideExtra');if(!box)return;box.textContent='';
-  GUIDE_EXTRA.forEach(x=>{const p=E('div','panel guide');p.append(E('h3','',x.title));const b=E('div');b.innerHTML=x.html;p.append(b);box.append(p)});
+/* ---------- Hook reference illustrations ---------- */
+function hookShape(bend){
+  return `<g fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="14" cy="27" r="6"/>
+    <path d="M20 27 H${bend} c10 0 16 6 16 14 s-6 14 -16 14 h-12 q-16 0 -23 -16"/>
+  </g>`;
+}
+function renderHookReference(){
+  const rows=$('hookRows'),scale=$('hookScale');
+  if(rows.firstChild)return;
+  const baseline=101;
+  [['Standard','Baseline'],['1XL','1X long'],['2XL','2X long'],['3XL','3X long']].forEach(([label,desc],i)=>{
+    const end=baseline+i*29;
+    const item=E('li','hook-row');
+    const caption=E('span');caption.append(E('strong','',label),E('small','',desc));
+    const drawing=E('span');
+    drawing.innerHTML=`<svg viewBox="0 0 212 62" preserveAspectRatio="xMinYMid meet" aria-hidden="true">
+      <path d="M20 17 V10 M20 13 H${end} M${end} 10 V17" fill="none" class="shank-mark"/>
+      ${i?`<path d="M${baseline} 13 H${end}" class="shank-extension"/>`:''}
+      <path d="M${end-35} 29 V39" class="hook-gap"/>
+      ${hookShape(end)}
+    </svg>`;
+    item.append(caption,drawing);rows.append(item);
+  });
+  const proportions=[1,.92,.84,.76,.69,.62,.55,.48,.42,.36,.30,.25];
+  proportions.forEach((ratio,i)=>{
+    const item=E('li');
+    item.innerHTML=`<svg viewBox="0 0 130 53" aria-hidden="true"><g transform="translate(${65-62*ratio} ${26.5-35*ratio}) scale(${ratio})">${hookShape(100)}</g></svg><strong>#${(i+1)*2}</strong>`;
+    scale.append(item);
+  });
 }
 
 /* ---------- wiring ---------- */
@@ -3670,15 +3931,15 @@ $('luckyBtn').onclick=()=>{
   if(pool.length)show(pool[Math.floor(Math.random()*pool.length)][0]);
 };
 $('navBackupBtn').onclick=()=>{
-  const go=()=>$('cardBackup').scrollIntoView({behavior:'smooth',block:'center'});
-  if($('view-home').style.display==='none'){location.hash='#/';setTimeout(go,80)}else go();
+  const go=()=>{const card=$('cardBackup');card.focus({preventScroll:true});card.scrollIntoView({block:'center'})};
+  if($('view-home').style.display==='none'){window.addEventListener('hashchange',go,{once:true});location.hash='#/'}else go();
 };
 $('weather').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.currentTarget.click()}});
 
 for(const {fly:[name,,ids]} of ROCKIES_BY_NAME.values()){
   if(ids.split(' ').some(id=>!Object.hasOwn(LB,id)))throw new Error('Unknown material in '+name);
 }
-const ver=E('p','ver','Fly Tracker v2.1 · Rocky Mountain catalog');
+const ver=E('p','ver','Fly Tracker v2.2 · Rocky Mountain catalog');
 document.querySelector('.wrap').append(ver);
 
 refreshCatFilter();
