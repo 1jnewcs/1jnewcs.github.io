@@ -1669,8 +1669,8 @@ try{localStorage.setItem(LSV,String(VER))}catch(e){}
 try{localStorage.removeItem('flysubs1')}catch(e){}
 
 const DUBMAP={'dub_hare':'dub_natural','dub_brown':'dub_natural','dub_gray':'dub_dark','dub_black':'dub_dark','dub_orange':'dub_hot','dub_pink':'dub_hot','dub_yellow':'dub_hot','dub_cream':'dub_tan'};
-inv=new Set([...inv].map(m=>Object.hasOwn(LB,m)?m:(DUBMAP[m]||m)));
-base=new Set([...base].map(m=>Object.hasOwn(LB,m)?m:(DUBMAP[m]||m)));
+inv=new Set([...inv].map(m=>(Object.hasOwn(LB,m)||['dub_brown','dub_gray'].includes(m))?m:(DUBMAP[m]||m)));
+base=new Set([...base].map(m=>(Object.hasOwn(LB,m)||['dub_brown','dub_gray'].includes(m))?m:(DUBMAP[m]||m)));
 const YARNMAP={'antron':'poly_yarn'};
 inv=new Set([...inv].map(m=>Object.hasOwn(LB,m)?m:(YARNMAP[m]||m)));
 base=new Set([...base].map(m=>Object.hasOwn(LB,m)?m:(YARNMAP[m]||m)));
@@ -1878,7 +1878,8 @@ function showRecipe(n){
   body.append(s);
   const copyBtn = act('Copy shopping list', async ()=>{
     const lines = ['Materials for '+n+' (thread '+thread(f)+', hook '+hooks(f)+'):'];
-    mats.forEach(m=>lines.push('- '+lab(m)+(inv.has(m)?' (owned)':'')));
+    mats.forEach(m=>lines.push('- '+orvisMaterialLabel(n,m)+(inv.has(m)?' (owned category; verify specification)':'')));
+    if(!isMyFly(n)&&ORVIS_BY_NAME.has(n)){lines.push('Hook model: '+ORVIS_BY_NAME.get(n).hook,'Source: '+ORVIS_BY_NAME.get(n).url);}
     try{ await navigator.clipboard.writeText(lines.join('\n')); msg('new','Shopping list copied.'); }catch(e){ msg('','Could not copy.'); }
   });
   const printBtn = act('Print Tying Sheet', ()=>printFlySheet(n));
@@ -1943,6 +1944,11 @@ function showBenchMode(recipe,start){
   kit.append(E('summary','','All recipe materials'),kitList);
   [...prep,...mats.map(id=>orvisMaterialLabel(n,id))].forEach(label=>kitList.append(E('li','',label)));
   aside.append(kit);
+  if(!isMyFly(n)&&ORVIS_BY_NAME.has(n)){
+    const reference=ORVIS_BY_NAME.get(n);
+    aside.append(ext(E('a','bench-secondary','Original Orvis demonstration'),reference.url));
+    if(reference.sequence_status==='source-linked')aside.append(E('p','bench-mode-note','Materials verified. This entry links to the original for the detailed tying sequence.'));
+  }
   if(!written)aside.append(E('p','bench-mode-note','Generic tying order based on this fly’s listed materials.'));
   grid.append(card,aside);scroller.append(grid);
 
@@ -3367,6 +3373,11 @@ function printFlySheet(n){
   ps.append(E('h1','',n));
   ps.append(E('p','',f[1]+(hooks(f)?'  \u00b7  Hook '+hooks(f):'')+(thread(f)?'  \u00b7  Thread '+thread(f):'')));
   if(photoFor(n)){const i=E('img');i.src=photoFor(n);ps.append(i)}
+  if(!isMyFly(n)&&ORVIS_BY_NAME.has(n)){
+    const ref=ORVIS_BY_NAME.get(n);ps.append(E('p','','Hook model: '+ref.hook));
+    if(ref.note)ps.append(E('p','',ref.note));
+    if(ref.sequence_status==='source-linked')ps.append(E('p','','Detailed tying sequence: see original Orvis demonstration.'));
+  }
   ps.append(E('h3','','Materials'));
   const ul=E('ul');f[2].split(' ').forEach(m=>ul.append(E('li','',(inv.has(m)?'\u2611 ':'\u2610 ')+orvisMaterialLabel(n,m))));ps.append(ul);
   if(FLYCOLORS[n])ps.append(E('p','','Colors: '+FLYCOLORS[n]));
