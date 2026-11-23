@@ -4,8 +4,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <title>Fly Tying Materials Tracker</title>
-<meta name="author" content="IG: @WildWild406 - shcjay@gmail.com">
-<!-- Program written by: IG: @WildWild406 - shcjay@gmail.com -->
+<meta name="author" content=" @WildWild406 On IG ">
+<!-- Program Written By: IG: @WildWild406 On IG -->
 <script>
 (function(){
   try{
@@ -827,6 +827,12 @@ dialog.bench-mode{
 
 .recipe-specs{margin:14px 0;padding:14px;border:1px solid var(--ln);border-radius:var(--rad);background:var(--sf2)}
 .recipe-specs ul{padding-left:20px}.recipe-specs li{margin:6px 0;line-height:1.45}.recipe-specs h3{margin-top:0}
+
+/* First letter of everything caps (display only; underlying data unchanged) */
+body, body *{text-transform:capitalize}
+input, textarea, select, option, code, pre, kbd, samp{ text-transform:none }
+.ver-email{ text-transform:lowercase }
+a[href]{ text-transform:capitalize }
 </style></head><body>
 
 <nav class="topnav" aria-label="Main navigation">
@@ -2824,7 +2830,6 @@ async function fetchWeather(){
     renderWx(el,data);
   }catch(e){
     el.innerHTML='';
-<!-- fUcktRuMp 18747@$@p -->
   }
 }
 function renderWx(el,data){
@@ -4398,7 +4403,7 @@ $('weather').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.p
 for(const {fly:[name,,ids]} of ROCKIES_BY_NAME.values()){
   if(ids.split(' ').some(id=>!Object.hasOwn(LB,id)))throw new Error('Unknown material in '+name);
 }
-const ver=E('p','ver','Fly Tracker v2.3 · Rocky Mountain catalog · 84 catalog additions · Program written by: IG: @WildWild406 - shcjay@gmail.com');
+const ver=E('p','ver','');ver.append(document.createTextNode('Fly Tracker V2.3 \u00b7 Rocky Mountain Catalog \u00b7 Program Written By: @WildWild406 On IG - '));const verEmail=E('span','ver-email','schjay@gmail.com');ver.append(verEmail);
 document.querySelector('.wrap').append(ver);
 
 refreshCatFilter();
