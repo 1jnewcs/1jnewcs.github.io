@@ -396,6 +396,7 @@ button.lnk:hover{color:var(--ac)}
 .close .fly-thumb{margin-right:6px}
 .planrow .fly-thumb{margin-right:6px}
 .recent-row .fly-chip{width:auto}
+.hatch-icon{flex:none;width:80px;height:80px;border-radius:10px;border:1px solid var(--ln);display:grid;place-items:center;font-size:2.2rem;background:color-mix(in srgb,var(--ac) 10%,var(--sf2))}
 .hatch-photo{display:flex;gap:14px;align-items:flex-start;margin-bottom:8px}
 .hatch-photo img{flex:none;width:80px;height:80px;object-fit:cover;border-radius:10px;border:1px solid var(--ln);background:color-mix(in srgb,var(--ac) 10%,var(--sf2))}
 .hatch-photo .hatch-thumb{flex:none;width:80px;height:80px;border-radius:10px;border:1px dashed var(--ln);display:grid;place-items:center;color:var(--mu);font-size:1.4rem;background:color-mix(in srgb,var(--ac) 6%,var(--sf2))}
@@ -2801,14 +2802,12 @@ function hatchCard(h,mi,open){
   const shown=nowTieableOnly?have:flies;
   const p=E('div','panel');p.style.marginBottom='12px';
   const photo = E('div','hatch-photo');
-  if(h.img){
-    const a = document.createElement('a');
-    a.href = h.img; a.target='_blank'; a.rel='noopener noreferrer';
-    const im = document.createElement('img');
-    im.src = h.img; im.alt = h.name + ' reference'; im.loading = 'lazy';
-    im.onerror = () => { const ph = E('div','hatch-thumb','🪶'); a.replaceWith(ph); };
-    a.append(im); photo.append(a);
-  } else { photo.append(E('div','hatch-thumb','🪶')); }
+  // Icon tile: same FLY_EMOJI set as the All Flies tabs, from the hatch's
+  // dominant fly type in the catalog (so the bug photos can never break it).
+  const typeCount={};
+  flies.forEach(n=>{const f=D.F.find(x=>x[0]===n);if(f)typeCount[f[1]]=(typeCount[f[1]]||0)+1});
+  const topType=Object.entries(typeCount).sort((a,b)=>b[1]-a[1])[0];
+  photo.append(E('div','hatch-icon',(topType&&(FLY_EMOJI[topType[0]]||'').trim())||'🪶'));
   const meta = E('div','hatch-meta');
   const hn=E('h3','hatch-link',h.name);clickable(hn,(e)=>{e.stopPropagation();AF.hatch=h;goAll()},'View all matching flies in the catalog');meta.append(hn, E('p','sub',h.note));
   meta.append(E('div','cnt', have.length+' of '+flies.length+' flies tie-able now'));
