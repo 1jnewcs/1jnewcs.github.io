@@ -4443,7 +4443,7 @@ $('weather').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.p
 for(const {fly:[name,,ids]} of ROCKIES_BY_NAME.values()){
   if(ids.split(' ').some(id=>!Object.hasOwn(LB,id)))throw new Error('Unknown material in '+name);
 }
-const ver=E('p','ver','Fly Tracker v2.3 · Rocky Mountain catalog');
+const ver=E('p','ver','Fly Tracker v2.3 · Rocky Mountain Catalog');
 document.querySelector('.wrap').append(ver);
 
 refreshCatFilter();
