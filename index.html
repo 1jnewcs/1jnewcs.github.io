@@ -840,6 +840,7 @@ h1::first-letter,h2::first-letter,h3::first-letter,h4::first-letter,li::first-le
       <a class="navlink" data-nav="mats" href="#/materials">All Materials</a>
       <a class="navlink" data-nav="now" href="#/now">Now</a>
       <a class="navlink" data-nav="guide" href="#/guide">Guide</a>
+      <a class="navlink" data-nav="about" href="#/about">About</a>
     </div>
     <div class="nav-weather" id="weather" role="button" tabindex="0" title="Click to change location"></div>
     <div class="nav-tools">
@@ -1180,6 +1181,33 @@ h1::first-letter,h2::first-letter,h3::first-letter,h4::first-letter,li::first-le
       <li><a href="https://www.youtube.com/results?search_query=proper+catch+and+release+trout" target="_blank" rel="noopener noreferrer" class="link">(Watch Catch & Release Videos)</a></li>
     </ul>
   </div>
+</div>
+
+
+<!-- ===== ABOUT VIEW ===== -->
+<div id="view-about">
+  <section class="panel" aria-labelledby="about-head">
+    <p class="sub" style="margin:0 0 6px">Fly Tracker / About</p>
+    <h1 id="about-head">About This Tracker</h1>
+    <p>Fly Tracker is a tying-bench companion for Rocky Mountain trout water. It holds a catalog of <strong><span id="about-count">hundreds of</span> patterns</strong> — dries, nymphs, emergers, streamers, terrestrials, foam flies, and stoneflies — with the materials, hooks, sizes, and hatches for each one.</p>
+    <h2>How To Use It</h2>
+    <ul>
+      <li><strong>Home:</strong> See what you can tie right now with the materials you have marked as owned, and what you are one or two materials short of.</li>
+      <li><strong>All Flies:</strong> Browse the whole catalog, filter by hatch or color, and open any fly for its full recipe, tying steps, and photo.</li>
+      <li><strong>My Materials:</strong> Mark the materials and threads you own so the tracker knows what is tieable.</li>
+      <li><strong>All Materials:</strong> See every material, which flies use it, and what is still missing.</li>
+      <li><strong>Now:</strong> Flies matched to the current month and hatch, so you can tie for what is actually on the water.</li>
+      <li><strong>Guide:</strong> Leader rigs, knots, hook reference, and reading-water notes for the tackle box.</li>
+    </ul>
+    <h2>Your Inventory Stays Yours</h2>
+    <p>Your owned materials, stars, notes, and custom flies live in your own browser. The catalog and its photos are shared with anyone who opens the page, but your inventory is never sent anywhere. Use Backup on the Home page to export it, and import that file to restore it on another device.</p>
+    <h2>A Note On Recipes</h2>
+    <p>Patterns are researched dressings, not a shop listing. Material categories tell you what kind of material a step needs — a category marked owned is not a guarantee of the exact size or color, so check hook, thread, bead, and dubbing details against the recipe before you tie.</p>
+    <h2>The Program</h2>
+    <p>Fly Tracker v2.3 · Rocky Mountain catalog.<br>
+    Program by Jay Newcombe — Instagram <a href="https://www.instagram.com/wildwild406" target="_blank" rel="noopener noreferrer">@WildWild406</a><br>
+    Contact: <a href="mailto:schjay@gmail.com">schjay@gmail.com</a></p>
+  </section>
 </div>
 
 </main>
@@ -2407,12 +2435,13 @@ $('printbtn').onclick=()=>printInventory();
 
 
 function setView(v){
-  const views={home:'view-home',all:'view-all',mats:'view-mats',inventory:'view-inventory',guide:'view-guide',now:'view-now'};
+  const views={home:'view-home',all:'view-all',mats:'view-mats',inventory:'view-inventory',guide:'view-guide',now:'view-now',about:'view-about'};
   Object.entries(views).forEach(([key,id])=>{$(id).style.display=key===v?'':'none'});
   if(v==='all')renderAllFlies();
   else if(v==='mats')renderAllMats();
   else if(v==='guide'){renderRigDeck();renderKnotDeck();renderBench();renderHookReference()}
   else if(v==='now')renderNow();
+  else if(v==='about'){const c=$('about-count');if(c)c.textContent=D.F.length;}
   else render();
   document.querySelectorAll('[data-nav]').forEach(a=>{
     const active=a.dataset.nav===v;a.classList.toggle('on',active);
@@ -2422,7 +2451,7 @@ function setView(v){
 function route(event){
   if(event&&benchSession&&dlg.open)dlg.close();
   const h=location.hash.replace(/^#\/?/,'');
-  const routes=new Map([['all','all'],['materials','mats'],['my-materials','inventory'],['guide','guide'],['now','now']]);
+  const routes=new Map([['all','all'],['materials','mats'],['my-materials','inventory'],['guide','guide'],['now','now'],['about','about']]);
   setView(routes.get(h)||'home');
   if(event){const m=$('msg');m.textContent='';m.className='';window.scrollTo({top:0,behavior:'instant'})}
 }
@@ -2475,7 +2504,7 @@ document.addEventListener('keydown',(e)=>{
     if(id){e.preventDefault();$(id).focus();$(id).select()}return;
   }
   if(/^[1-6]$/.test(e.key)){
-    const map={'1':'#/','2':'#/all','3':'#/materials','4':'#/now','5':'#/guide','6':'#/my-materials'};
+    const map={'1':'#/','2':'#/all','3':'#/materials','4':'#/now','5':'#/guide','6':'#/my-materials','7':'#/about'};
     location.hash=map[e.key];
   }
 });
