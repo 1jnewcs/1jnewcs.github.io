@@ -366,6 +366,36 @@ button.lnk:hover{color:var(--ac)}
 .deck-card .klinks a{display:inline-block;padding:6px 12px;border:1px solid var(--ln);border-radius:8px;font-size:.84rem;color:var(--ac);text-decoration:none;transition:border-color .15s,background .15s}
 .deck-card .klinks a:hover{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 6%,transparent)}
 
+.now-collapse summary{display:flex;justify-content:space-between;align-items:center;gap:10px;cursor:pointer;list-style:none}
+.now-collapse summary::-webkit-details-marker{display:none}
+.now-collapse summary h2,.now-collapse summary span:first-child{margin:0;font-size:1rem;font-weight:650}
+.now-collapse[open ] .now-chev{transform:rotate(90deg)}
+.now-chev{display:inline-block;transition:transform .15s;color:var(--mu)}
+.now-collapse #flows{margin-top:10px}
+.now-collapse #tripPanel{margin-top:10px}
+.hatch-head{display:flex;gap:14px;align-items:flex-start;width:100%;text-align:left;background:none;border:0;padding:0;color:inherit;font:inherit;cursor:pointer}
+.hatch-head .hatch-photo{flex:1;margin-bottom:0}
+.hatch-body{margin-top:10px}
+.hatch-body[hidden]{display:none}
+.tie-strip{display:flex;flex-wrap:wrap;gap:8px}
+.tie-strip .tie-chip{display:flex;flex-direction:row;align-items:center;gap:10px;text-align:left;padding:6px 12px 6px 6px}
+.tie-strip .tie-chip small{color:var(--mu);font-size:.72rem}
+.tie-chip .tie-img{width:56px;height:56px;flex:none;object-fit:cover;border-radius:8px;border:1px solid var(--ln);background:var(--sf2)}
+.tie-chip .tie-thumb{width:56px;height:56px;flex:none;border-radius:8px;border:1px dashed var(--ln);display:grid;place-items:center;font-size:1.2rem;background:color-mix(in srgb,var(--ac) 6%,var(--sf2))}
+.tie-chip .tie-text{display:flex;flex-direction:column;gap:2px;min-width:0}
+.tie-chip .tie-name{font-weight:600}
+.fly-thumb{width:40px;height:40px;flex:none;object-fit:cover;border-radius:8px;border:1px solid var(--ln);background:var(--sf2)}
+.fly-thumb.sm{width:28px;height:28px;border-radius:6px}
+.fly-thumb.lg{width:56px;height:56px}
+.fly-thumb-ph{display:grid;place-items:center;font-size:1.1rem;border-style:dashed}
+.fly-chip-text{display:flex;flex-direction:column;gap:1px;min-width:0;text-align:left}
+.fly-chip-text small{color:var(--mu);font-size:.72rem}
+.row .fly-chip,.tie-strip .tie-chip{width:auto}
+.near-preview li{align-items:center}
+.near-preview .fly-thumb{margin-right:2px}
+.close .fly-thumb{margin-right:6px}
+.planrow .fly-thumb{margin-right:6px}
+.recent-row .fly-chip{width:auto}
 .hatch-photo{display:flex;gap:14px;align-items:flex-start;margin-bottom:8px}
 .hatch-photo img{flex:none;width:80px;height:80px;object-fit:cover;border-radius:10px;border:1px solid var(--ln);background:color-mix(in srgb,var(--ac) 10%,var(--sf2))}
 .hatch-photo .hatch-thumb{flex:none;width:80px;height:80px;border-radius:10px;border:1px dashed var(--ln);display:grid;place-items:center;color:var(--mu);font-size:1.4rem;background:color-mix(in srgb,var(--ac) 6%,var(--sf2))}
@@ -1018,9 +1048,13 @@ h1::first-letter,h2::first-letter,h3::first-letter,h4::first-letter,li::first-le
 <div id="view-now" style="display:none">
   <div class="hero"><div class="titles"><h1>Now: Hatches &amp; Flows</h1>
   <p class="sub">What's hatching in SW Montana this month, which of those flies you can tie today, and live river conditions.</p></div></div>
-  <div class="panel"><h2>Rivers (USGS live)</h2><div id="flows" class="sub">Loading…</div></div>
-  <div class="panel" id="tripPanel"></div>
+  <div class="panel" id="tieTonightPanel"><h2>Tie Tonight</h2>
+    <p class="sub">Tieable flies for what is hatching right now.</p>
+    <div id="tieTonight"></div>
+  </div>
   <div id="hatches"></div>
+  <details class="panel now-collapse"><summary><span>Rivers (USGS live)</span><span class="now-chev" aria-hidden="true">▸</span></summary><div id="flows" class="sub">Loading…</div></details>
+  <details class="panel now-collapse"><summary><span>Plan a trip</span><span class="now-chev" aria-hidden="true">▸</span></summary><div id="tripPanel"></div></details>
 </div>
 
 <!-- ===== GUIDE VIEW ===== -->
@@ -1189,7 +1223,7 @@ h1::first-letter,h2::first-letter,h3::first-letter,h4::first-letter,li::first-le
   <section class="panel" aria-labelledby="about-head">
     <p class="sub" style="margin:0 0 6px">Fly Tracker / About</p>
     <h1 id="about-head">About This Tracker</h1>
-    <p>Fly Tracker is a tying-bench companion for Rocky Mountain trout waters and beyond. It holds a catalog of <strong><span id="about-count">hundreds of</span> patterns</strong> — dries, nymphs, emergers, streamers, terrestrials, foam flies, and stoneflies — with the materials, hooks, sizes, and hatches for each one.</p>
+    <p>Fly Tracker is a tying-bench companion for Rocky Mountain trout water. It holds a catalog of <strong><span id="about-count">hundreds of</span> patterns</strong> — dries, nymphs, emergers, streamers, terrestrials, foam flies, and stoneflies — with the materials, hooks, sizes, and hatches for each one.</p>
     <h2>How To Use It</h2>
     <ul>
       <li><strong>Home:</strong> See what you can tie right now with the materials you have marked as owned, and what you are one or two materials short of.</li>
@@ -1228,8 +1262,8 @@ h1::first-letter,h2::first-letter,h3::first-letter,h4::first-letter,li::first-le
     <h2>A Note On Recipes</h2>
     <p>Patterns are researched dressings, not a shop listing. Material categories tell you what kind of material a step needs — a category marked owned is not a guarantee of the exact size or color, so check hook, thread, bead, and dubbing details against the recipe before you tie.</p>
     <h2>The Program</h2>
-    <p>Fly Tracker v2.3 · Rocky Mountain Catalog.<br>
-    Program by Instagram <a href="https://www.instagram.com/wildwild406" target="_blank" rel="noopener noreferrer">@WildWild406</a><br>
+    <p>Fly Tracker v2.3 · Rocky Mountain catalog.<br>
+    Program by Jay Newcombe — Instagram <a href="https://www.instagram.com/wildwild406" target="_blank" rel="noopener noreferrer">@WildWild406</a><br>
     Contact: <a href="mailto:schjay@gmail.com">schjay@gmail.com</a></p>
   </section>
 </div>
@@ -2224,7 +2258,7 @@ function render(){
     if(valid.length){
       rr.style.display='';
       rr.append(E('b','','Recent:'));
-      valid.slice(0,5).forEach(n=>{const b=E('button','',n);b.type='button';b.onclick=()=>show(n);rr.append(b)});
+      valid.slice(0,5).forEach(n=>{const b=E('button','fly-chip');b.type='button';b.onclick=()=>show(n);b.append(flyThumb(n,'sm'),E('span','',n));rr.append(b)});
       const clr=E('button','rclear','clear');clr.type='button';clr.onclick=()=>{recent=[];saveRecent();render()};rr.append(clr);
     } else {
       rr.style.display='none';
@@ -2315,9 +2349,7 @@ function render(){
   $('closeAcc').hidden=!closeFlies.length;
   $('closeLabel').textContent=closeOpen?'Hide closest flies':closest.length>50?'Show 50 closest flies':'Show closest flies';
   const preview=$('closePreview');preview.textContent='';preview.hidden=closeOpen&&closeFlies.length>0;
-  closeFlies.slice(0,3).forEach(([f,m])=>{
-    const li=E('li');li.append(L(f[0],'lnk'),E('small','',m.length+' missing'));preview.append(li);
-  });
+  closeFlies.slice(0,3).forEach(([f,m])=>{const li=E('li');li.append(flyThumb(f[0],'sm'),L(f[0],'lnk'),E('small','',m.length+' missing'));preview.append(li);});
   if(!closeFlies.length)preview.append(E('li','sub','No patterns are one or two materials away.'));
   if(cHead){cHead.setAttribute('aria-expanded',closeOpen?'true':'false');cHead.parentElement.classList.toggle('open',closeOpen)}
   if(cBody){ if(closeOpen) cBody.removeAttribute('hidden'); else cBody.setAttribute('hidden',''); }
@@ -2333,7 +2365,7 @@ function render(){
       h.append(c+' ',E('span','','('+list.length+' · '+one+' one-away'+(two?' · '+two+' two-away':'')+')'));
       d.append(h);
       const ul=E('ul','close');
-      list.forEach(([f,m])=>{const li=E('li');li.append(L(f[0],'lnk'),' ',E('small','','Needs '+m.map(lab).join(' And ')));ul.append(li)});
+      list.forEach(([f,m])=>{const li=E('li');li.append(flyThumb(f[0],'sm'),L(f[0],'lnk'),' ',E('small','','Needs '+m.map(lab).join(' And ')));ul.append(li)});
       d.append(ul);
       cl.append(d);
     });
@@ -2763,8 +2795,10 @@ const HATCH=[
    img:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Gammarus_pulex.jpg/320px-Gammarus_pulex.jpg'}
 ];
 const MN=['January','February','March','April','May','June','July','August','September','October','November','December'];
-function hatchCard(h,mi){
+function hatchCard(h,mi,open){
   const flies=D.F.map(f=>f[0]).filter(n=>shownInHatch(n,h)),ok=new Set(can(inv)),have=flies.filter(n=>ok.has(n));
+  if(nowTieableOnly&&!have.length)return null;
+  const shown=nowTieableOnly?have:flies;
   const p=E('div','panel');p.style.marginBottom='12px';
   const photo = E('div','hatch-photo');
   if(h.img){
@@ -2776,19 +2810,46 @@ function hatchCard(h,mi){
     a.append(im); photo.append(a);
   } else { photo.append(E('div','hatch-thumb','🪶')); }
   const meta = E('div','hatch-meta');
-  const hn=E('h3','hatch-link',h.name);clickable(hn,()=>{AF.hatch=h;goAll()},'View all matching flies in the catalog');meta.append(hn, E('p','sub',h.note));
+  const hn=E('h3','hatch-link',h.name);clickable(hn,(e)=>{e.stopPropagation();AF.hatch=h;goAll()},'View all matching flies in the catalog');meta.append(hn, E('p','sub',h.note));
   meta.append(E('div','cnt', have.length+' of '+flies.length+' flies tie-able now'));
-  photo.append(meta); p.append(photo);
+  photo.append(meta);
+  const chev=E('span','now-chev','\u25b8');chev.style.cssText='font-size:1.2rem;color:var(--mu);flex:none';
+  const head=E('button','hatch-head');head.type='button';head.setAttribute('aria-expanded',open?'true':'false');
+  head.append(photo,chev);
+  const body=E('div','hatch-body');if(!open)body.hidden=true;
   const row=E('div','row');
-  flies.forEach(n=>{const b=act(n+(ok.has(n)?'':' \u2022 missing materials'),()=>show(n),ok.has(n)?'':'');if(!ok.has(n))b.style.opacity='.6';row.append(b)});
-  p.append(row);return p;
+  shown.forEach(n=>{row.append(flyChip(n,ok.has(n)?'':'\u2022 missing materials',ok.has(n)))});
+  body.append(row);
+  head.onclick=()=>{body.hidden=!body.hidden;head.setAttribute('aria-expanded',body.hidden?'false':'true');chev.style.transform=body.hidden?'':'rotate(90deg)'};
+  if(open)chev.style.transform='rotate(90deg)';
+  p.append(head,body);return p;
 }
+let nowTieableOnly=false;
 function renderNow(){
   const box=$('hatches');box.textContent='';const mi=new Date().getMonth(),nx=(mi+1)%12;
-  box.append(E('h2','','In season: '+MN[mi]));
-  HATCH.filter(h=>h.months.includes(mi)).forEach(h=>box.append(hatchCard(h,mi)));
+  const inSeason=HATCH.filter(h=>h.months.includes(mi));
+  // Tie tonight: up to 5 tieable flies across this month's hatches, hatch order kept.
+  const strip=$('tieTonight');strip.textContent='';
+  const ok=new Set(can(inv)),picked=[],seenPick=new Set();
+  inSeason.forEach(h=>{D.F.map(f=>f[0]).filter(n=>shownInHatch(n,h)).forEach(n=>{if(ok.has(n)&&!seenPick.has(n)&&picked.length<5){seenPick.add(n);picked.push({n,h:h.name})}})});
+  if(picked.length){
+    const row=E('div','tie-strip');
+    picked.forEach(({n,h})=>{row.append(flyChip(n,h,true,'tie-chip'))});
+    strip.append(row);
+  } else {
+    strip.append(E('p','sub','No in-season flies are fully tieable yet — check Almost there on Home for the closest patterns.'));
+  }
+  // Hatches, collapsed. First in-season card starts open.
+  const head=E('div','bench-heading');const headTitle=E('div');headTitle.append(E('h2','','In season: '+MN[mi]));head.append(headTitle);
+  const tog=E('label','subtoggle');tog.title='Show only flies you can tie';tog.style.cssText='white-space:nowrap';
+  const cb=E('input');cb.type='checkbox';cb.checked=nowTieableOnly;
+  cb.onchange=()=>{nowTieableOnly=cb.checked;renderNow()};
+  tog.append(cb,document.createTextNode(' Tieable only'));head.append(tog);
+  box.append(head);
+  let first=true;
+  inSeason.forEach(h=>{const c=hatchCard(h,mi,first);if(c)box.append(c);first=false});
   const soon=HATCH.filter(h=>h.months.includes(nx)&&!h.months.includes(mi));
-  if(soon.length){box.append(E('h2','','Coming in '+MN[nx]));soon.forEach(h=>box.append(hatchCard(h,nx)))}
+  if(soon.length){box.append(E('h2','','Coming in '+MN[nx]));soon.forEach(h=>{const c=hatchCard(h,nx,false);if(c)box.append(c)})}
   box.append(E('p','sub','Hatch timing is a general SW Montana guide. It shifts a couple of weeks with elevation, runoff and weather.'));
   renderTrip();loadFlows();
 }
@@ -3492,6 +3553,8 @@ const SHARED_PHOTOS = Object.freeze({
   "Matt\u2019s Monster Bugger": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%2Fid%2FOIP._zZjMwv56e-bmcHqRUnSaQHaFG%3Fr%3D0%26pid%3DApi&f=1&ipt=ee34fd0a951058f6443d2c959ea5d971bde80e47e3e59757d7cfaf2b4539529d&ipo=images"
 });
 function photoFor(n){return PH[n] || SHARED_PHOTOS[n] || "";}
+function flyThumb(n,cls){const src=photoFor(n);const ph=E('div','fly-thumb fly-thumb-ph'+(cls?' '+cls:''),'\uD83E\uDEB6');if(!src)return ph;const im=document.createElement('img');im.className='fly-thumb'+(cls?' '+cls:'');im.src=src;im.alt=n;im.loading='lazy';im.onerror=()=>{im.replaceWith(ph)};return im}
+function flyChip(n,note,ok,cls){const b=act('',()=>show(n),cls||'fly-chip');b.append(flyThumb(n));const tx=E('div','fly-chip-text');tx.append(E('span','',n));if(note)tx.append(E('small','',note));b.append(tx);if(ok===false)b.style.opacity='.6';return b}
 
 function shrinkImage(file,cb){const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const k=Math.min(1,600/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);cb(c.toDataURL('image/jpeg',.7))};im.src=r.result};r.readAsDataURL(file)}
 // ===== PRINT SHEET =====
@@ -3528,7 +3591,7 @@ function showPlanner(preset){
   const draw=()=>{
     const q=sI.value.trim().toLowerCase(),ok=new Set(can(inv));list.textContent='';
     D.F.filter(f=>(plan[f[0]]||0)>0||(q&&f[0].toLowerCase().includes(q))).slice(0,40).forEach(f=>{
-      const n=f[0],r=E('div','planrow');r.append(E('span','nm',n+(ok.has(n)?'':'  \u2022 missing')));
+      const n=f[0],r=E('div','planrow');r.append(flyThumb(n,'sm'));r.append(E('span','nm',n+(ok.has(n)?'':'  \u2022 missing')));
       const mn=E('button','','\u2212'),pl=E('button','','+'),q2=E('span','',String(plan[n]||0));mn.type=pl.type='button';
       mn.onclick=()=>{plan[n]=Math.max(0,(plan[n]||0)-1);if(!plan[n])delete plan[n];draw()};pl.onclick=()=>{plan[n]=(plan[n]||0)+1;draw()};
       r.append(mn,q2,pl);list.append(r)});
@@ -3554,7 +3617,6 @@ function showPlanner(preset){
 let lastFlows={};
 function renderTrip(){
   const box=$('tripPanel');if(!box)return;box.textContent='';
-  box.append(E('h2','','Plan a trip'));
   const row=E('div','formrow inline');
   const sel=E('select');sel.style.cssText='padding:8px;border:1px solid var(--ln);border-radius:8px;background:var(--sf);color:var(--ink);font:inherit';
   Object.entries(GAUGES).forEach(([id,nm])=>sel.append(new Option(nm,id)));
@@ -3569,7 +3631,7 @@ function renderTrip(){
     if(g&&g['00010']!=null){const F=Math.round(g['00010']*9/5+32);out.append(E('p','sub','Water now: '+F+'\u00b0F'+(F>=68?' \u2014 too warm, fish early.':F<=40?' \u2014 cold, go slow and deep.':'.')))}
     const names=[...new Set(hs.flatMap(h=>D.F.map(f=>f[0]).filter(n=>shownInHatch(n,h))))];
     const ok=new Set(can(inv));names.sort((a,b)=>(ok.has(b)-ok.has(a))||a.localeCompare(b));
-    const r=E('div','row');names.slice(0,16).forEach(n=>{const b=act(n+(ok.has(n)?'':' \u2022 missing'),()=>show(n));if(!ok.has(n))b.style.opacity='.6';r.append(b)});out.append(r);
+    const r=E('div','row');names.slice(0,16).forEach(n=>{r.append(flyChip(n,ok.has(n)?'':'\u2022 missing',ok.has(n)))});out.append(r);
     const tie=names.filter(n=>ok.has(n)).slice(0,8);
     const pb=E('button','chip star','Send these to the session planner');pb.type='button';pb.style.marginTop='10px';
     pb.onclick=()=>{const p={};names.slice(0,8).forEach(n=>p[n]=3);showPlanner(p)};out.append(pb);
@@ -4443,7 +4505,7 @@ $('weather').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.p
 for(const {fly:[name,,ids]} of ROCKIES_BY_NAME.values()){
   if(ids.split(' ').some(id=>!Object.hasOwn(LB,id)))throw new Error('Unknown material in '+name);
 }
-const ver=E('p','ver','Fly Tracker v2.3 · Rocky Mountain Catalog');
+const ver=E('p','ver','Fly Tracker v2.3 · Rocky Mountain catalog');
 document.querySelector('.wrap').append(ver);
 
 refreshCatFilter();
